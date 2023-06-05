@@ -6,13 +6,12 @@ using Cinemachine;
 public class Finish : MonoBehaviour
 {
     public CinemachineVirtualCamera camera;
-    public void Cam(bool active) => camera.enabled = active;
-
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Finish"))
-        { 
-            Cam(false);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("BBBB");
+            camera.Follow = null;
         }
     }
 }
