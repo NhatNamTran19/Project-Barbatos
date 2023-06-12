@@ -10,7 +10,9 @@ public class PlayerCombatController : MonoBehaviour
 
     private bool gotInput;
     private bool isAttacking;
-    private bool isFirstAttack;   
+    private bool isFirstAttack;
+
+    [SerializeField] private PlayerController playerController;
     [SerializeField] private bool combatEnable;
     [SerializeField] private float inputTimer;
     [SerializeField] private float attack1Radius;
@@ -25,6 +27,7 @@ public class PlayerCombatController : MonoBehaviour
     //}
     private void Start()
     {
+        playerController = GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
         animator.SetBool("canAttack", combatEnable);
     }
@@ -39,7 +42,7 @@ public class PlayerCombatController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            if (combatEnable)
+            if (combatEnable && !playerController.isSliding&& !playerController.isWall())
             {
                 gotInput = true;
                 lastInputtime = Time.time;

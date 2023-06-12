@@ -19,13 +19,11 @@ public class PlayerController : MonoBehaviour
     private bool isTurn;
     private bool canDash = true;
     private bool isDashing;
-    private bool isSliding;
+    public bool isSliding;
     private bool canSlide ;
     private bool isWallJump;
 
-
     [SerializeField] private float wallJumpForce;
-    [SerializeField] private Vector2 wallJumpDicrection;
     [SerializeField] private float dashPower = 24f;
     [SerializeField] private float dashingTime = 0.4f;
     [SerializeField] private float dashCooldown = 1f;
@@ -202,7 +200,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown); //thoi gian cho de luot lan tiep theo
         canDash = true; // cho nhan vat luot lan tiep theo
     }
-    private bool isWall()
+    public bool isWall()
     {
         if (dicX>0)
         {
