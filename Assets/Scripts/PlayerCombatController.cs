@@ -12,6 +12,8 @@ public class PlayerCombatController : MonoBehaviour
     private bool isAttacking;
     private bool isFirstAttack;
 
+    private float[] attackDetails = new float[2];
+
     [SerializeField] private PlayerController playerController;
     [SerializeField] private bool combatEnable;
     [SerializeField] private float inputTimer;
@@ -72,9 +74,14 @@ public class PlayerCombatController : MonoBehaviour
     private void CheckAttackHitBox()
     {
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attack1HitBoxPos.position,attack1Radius, damageAlbe);
-        foreach (Collider2D collider in detectedObjects)
+        attackDetails[0] = 10;
+        attackDetails[1] = transform.position.x;
+        foreach (Collider2D enemy in detectedObjects)
         {
-            collider.transform.parent.SendMessage("damage", attack1Damage);
+            //collider.transform.parent.SendMessage("damage", attackDetails);
+            Debug.Log("hit something");
+            enemy.GetComponent<EnemyTest>().Damage(attackDetails);
+            //collider.transform.parent.SendMessage("Damage", attackDetails);
         }
     }
     private void FinishAttack1()

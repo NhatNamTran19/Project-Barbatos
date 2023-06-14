@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private MovementState movementState;
     private float dicX;
     private float scaleX;
+    private float scaleY;
+    private int facingDirection;
 
     private float Right ;
     private bool isRuning;
@@ -49,6 +52,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();  
         boxcol = GetComponent<BoxCollider2D>();
         scaleX = transform.localScale.x;
+        facingDirection = 1;
     }
 
     void Update()
@@ -64,6 +68,7 @@ public class PlayerController : MonoBehaviour
         UpdateState();
         Dashing();
         WallJump();
+        Debug.Log(scaleY);
        
     }
     private void FixedUpdate()
@@ -106,6 +111,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3((-1) * scaleX, transform.localScale.y, transform.localScale.z);
         }
+
     }
     private void WallJump()
     {
@@ -160,7 +166,6 @@ public class PlayerController : MonoBehaviour
         if(dicX > 0f)
         {         
             movementState = MovementState.runing;
-
         }
         else if(dicX < 0f) 
         {
