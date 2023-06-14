@@ -15,19 +15,11 @@ TagManager:
   - Wall
   - Water
   - UI
-  - Ceilling
   - Ground
-  - Level
-  - Enemy
-  - Usable
-  - Interactable
-  - IgnorePlayer
   - Player
-  - Cameras
-  - LitSprites
+  - Enemy
   - Destructable
-  - EnemyWeapon
-  - BossWeakPoint
+  - EnemyHitBox
   - Bullet
   - Damageable
   - 
@@ -39,8 +31,16 @@ TagManager:
   - 
   - 
   - 
-  - PlayerDrop
-  - Platform
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0

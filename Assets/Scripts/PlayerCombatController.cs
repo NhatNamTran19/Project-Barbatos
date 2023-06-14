@@ -75,7 +75,7 @@ public class PlayerCombatController : MonoBehaviour
     {
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attack1HitBoxPos.position,attack1Radius, damageAlbe);
         attackDetails[0] = 10;
-        attackDetails[1] = transform.position.x;
+        attackDetails[1] = this.transform.position.x;
         foreach (Collider2D enemy in detectedObjects)
         {
             //collider.transform.parent.SendMessage("damage", attackDetails);

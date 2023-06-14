@@ -17,8 +17,10 @@ public class EnemyTest : MonoBehaviour
 
     private bool groundDetected;
     private bool wallDetected;
+    private bool detectTarget;
 
-
+    [SerializeField] private AttackZone attackZone;
+    [SerializeField] private DetectedZone detectedZone;
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private float wallCheckDistance;
     [SerializeField] private float maxHealth;
@@ -26,10 +28,15 @@ public class EnemyTest : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private Vector2 hitSpeed;
-    [SerializeField] private float movingSpeed = 2f;
+    [SerializeField] private float movingSpeed ;
     [SerializeField] private LayerMask whatIsGround;
     private int curWayPointIndex = 0;
     private Vector2 movement;
+
+    [SerializeField] private Transform attack1HitBoxPos;
+    [SerializeField] private float attack1Radius;
+    [SerializeField] private LayerMask damageAlbe;
+
 
     private enum State
     {
@@ -40,6 +47,26 @@ public class EnemyTest : MonoBehaviour
     }
 
     private State currentState;
+
+    public bool _hasTarget = false;
+    public bool HasTarget
+    {
+        get { return _hasTarget; }
+        private set
+        {
+            _hasTarget = value;
+            animator.SetBool("hasTarget", value);
+        }
+    }
+    public bool canMove
+    {
+        get
+        {
+            return animator.GetBool("canMove");
+        }
+    }
+    
+
 
     void Awake()
     {
@@ -59,17 +86,45 @@ public class EnemyTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        HasTarget = attackZone.detectedCollieders.Count > 0;
+        detectTarget = detectedZone.detectedCollieders.Count > 0;
+        //AIEnemy();
+        Debug.Log(detectTarget);
+        //Move();
 
     }
     private void FixedUpdate()
     {
         CheckSurroundings();
+        ChasePlayer();
+
+    }
+    private void ChasePlayer()
+    {
+        if (detectTarget)
+        {
+            movement.Set(movingSpeed *2* facingDirection, rb.velocity.y);
+            rb.velocity = movement;
+        }
+        else
+        {
+            CanMove();
+        }
+    }
+
+    private void CanMove()
+    {
+        if (canMove)
+        {
+            Move();
+        }
+        else
+        { rb.velocity = new Vector2(0f, rb.velocity.y); }
     }
 
     private void Move()
     {
-        if ((!groundDetected && rb.velocity.y > 0) || wallDetected)
+        if ((!groundDetected && rb.velocity.y >= 0) || wallDetected)
         {
             Flip();
         }
@@ -95,13 +150,14 @@ public class EnemyTest : MonoBehaviour
     {
         Gizmos.DrawLine(groundCheck.position, new Vector2(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
         Gizmos.DrawLine(wallCheck.position, new Vector2(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
+        Gizmos.DrawWireSphere(attack1HitBoxPos.position, attack1Radius);
     }
 
     public void Damage(float[] attackDetails)
     {
         currentHealth -= attackDetails[0];
 
-        if (attackDetails[1] > transform.position.x)
+        if (attackDetails[1] > this.transform.position.x)
         {
             damageDirection = -1;
         }
@@ -109,8 +165,14 @@ public class EnemyTest : MonoBehaviour
         {
             damageDirection = 1;
         }
-        movement.Set(hitSpeed.x * damageDirection, hitSpeed.y);
+        
+        movement.Set(movingSpeed*hitSpeed.x * damageDirection, hitSpeed.y);
         rb.velocity = movement;
+        if (!HasTarget)
+        {
+          
+            Flip();
+        }
         animator.SetTrigger("hit");
         if (currentHealth <= 0)
         {
@@ -126,6 +188,20 @@ public class EnemyTest : MonoBehaviour
         boxcol.usedByEffector = true;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         this.enabled = false;
+    }
+    
+    private void CheckAttackHitBox()
+    {
+        Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attack1HitBoxPos.position, attack1Radius, damageAlbe);
+        //attackDetails[0] = 10;
+        //attackDetails[1] = this.transform.position.x;
+        foreach (Collider2D enemy in detectedObjects)
+        {
+            //collider.transform.parent.SendMessage("damage", attackDetails);
+            Debug.Log("hit something");
+            //enemy.GetComponent<EnemyTest>().Damage(attackDetails);
+            //collider.transform.parent.SendMessage("Damage", attackDetails);
+        }
     }
 }
 
