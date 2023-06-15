@@ -17,8 +17,8 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     [SerializeField] private bool combatEnable;
     [SerializeField] private float inputTimer;
-    [SerializeField] private float attack1Radius;
-    [SerializeField] private Transform attack1HitBoxPos;
+    //[SerializeField] private float attack1Radius;
+    //[SerializeField] private Transform attack1HitBoxPos;
     [SerializeField] private LayerMask damageAlbe;
 
     //private void Awake()
@@ -70,27 +70,27 @@ public class PlayerCombatController : MonoBehaviour
             gotInput = false;
         }
     }
-    private void CheckAttackHitBox()
-    {
-        Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attack1HitBoxPos.position,attack1Radius, damageAlbe);
-        attackDetails[0] = 10;
-        attackDetails[1] = this.transform.position.x;
-        foreach (Collider2D enemy in detectedObjects)
-        {
-            //collider.transform.parent.SendMessage("damage", attackDetails);
-            Debug.Log("hit something");
-            enemy.GetComponent<EnemyTest>().Damage(attackDetails);
-            //collider.transform.parent.SendMessage("Damage", attackDetails);
-        }
-    }
+    //private void CheckAttackHitBox()
+    //{
+    //    Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attack1HitBoxPos.position,attack1Radius, damageAlbe);
+    //    attackDetails[0] = 10;
+    //    attackDetails[1] = this.transform.position.x;
+    //    foreach (Collider2D enemy in detectedObjects)
+    //    {
+    //        //collider.transform.parent.SendMessage("damage", attackDetails);
+    //        Debug.Log("hit something");
+    //        enemy.GetComponent<EnemyTest>().Damage(attackDetails);
+    //        //collider.transform.parent.SendMessage("Damage", attackDetails);
+    //    }
+    //}
     private void FinishAttack1()
     {
         isAttacking= false;
         animator.SetBool("isAttacking", isAttacking);
         animator.SetBool("attk1", false);
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(attack1HitBoxPos.position, attack1Radius);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.DrawWireSphere(attack1HitBoxPos.position, attack1Radius);
+    //}
 }

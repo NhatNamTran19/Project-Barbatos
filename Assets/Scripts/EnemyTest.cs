@@ -102,9 +102,9 @@ public class EnemyTest : MonoBehaviour
     }
     private void ChasePlayer()
     {
-        if (detectTarget)
+        if (detectTarget && groundDetected)
         {
-            movement.Set(movingSpeed *2* facingDirection, rb.velocity.y);
+            movement.Set(movingSpeed *2.5f* facingDirection, rb.velocity.y);
             rb.velocity = movement;
         }
         else
@@ -120,7 +120,9 @@ public class EnemyTest : MonoBehaviour
             Move();
         }
         else
-        { rb.velocity = new Vector2(0f, rb.velocity.y); }
+        { rb.velocity = new Vector2(0, rb.velocity.y);
+            //movingSpeed = 0f;
+        }
     }
 
     private void Move()
@@ -158,22 +160,41 @@ public class EnemyTest : MonoBehaviour
     {
         currentHealth -= attackDetails[0];
 
-        if (attackDetails[1] > this.transform.position.x)
+        if (attackDetails[1] < this.transform.position.x)
         {
-            damageDirection = -1;
+            damageDirection = 2;           
         }
         else
         {
-            damageDirection = 1;
+            damageDirection = -2;           
         }
-        
-        movement.Set(movingSpeed*hitSpeed.x * damageDirection, hitSpeed.y);
-        rb.velocity = movement;
+        //Debug.Log(rb.velocity.x);
         if (!HasTarget)
         {
-          
             Flip();
         }
+        movement.Set(10f*damageDirection, hitSpeed.y);
+        rb.velocity = movement;
+             
+        animator.SetTrigger("hit");
+        if (currentHealth <= 0)
+        {
+            Dead();
+        }
+    }
+    public void Damage2(float damage)
+    {
+        currentHealth -= damage;
+
+        
+        //Debug.Log(rb.velocity.x);
+        if (!HasTarget)
+        {
+            Flip();
+        }
+        movement.Set(10f*damageDirection, hitSpeed.y);
+        rb.velocity = movement;
+             
         animator.SetTrigger("hit");
         if (currentHealth <= 0)
         {

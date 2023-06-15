@@ -231,7 +231,18 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth -= attackEnemyDetails[0];
 
-        rb.velocity = new Vector2(moveSpeed * hitSpeed.x * damageDirection, hitSpeed.y) ;       
+        rb.velocity = new Vector2(0f, hitSpeed.y) ;       
+        animator.SetTrigger("hit");
+        if (currentHealth <= 0)
+        {
+            Dead();
+        }
+    }
+    public void Damage2(float attackEnemyDetails)
+    {
+        currentHealth -= attackEnemyDetails;
+
+        rb.velocity = new Vector2(0f, hitSpeed.y) ;       
         animator.SetTrigger("hit");
         if (currentHealth <= 0)
         {
