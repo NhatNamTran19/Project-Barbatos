@@ -26,6 +26,11 @@ public class PlayerController : MonoBehaviour
     private bool canSlide ;
     private bool isWallJump;
 
+    private int damageDirection;
+    private float currentHealth;
+    private float[] attackEnemyDetails = new float[2];
+
+    [SerializeField] private float maxHealth;
     [SerializeField] private float wallJumpForce;
     [SerializeField] private float dashPower = 24f;
     [SerializeField] private float dashingTime = 0.4f;
@@ -34,7 +39,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce;
     [SerializeField] private float GravityWall;
     [SerializeField] private LayerMask jumpGround;
-    
+    [SerializeField] private Vector2 hitSpeed;
+
+
 
     private enum MovementState 
     {
@@ -53,6 +60,8 @@ public class PlayerController : MonoBehaviour
         boxcol = GetComponent<BoxCollider2D>();
         scaleX = transform.localScale.x;
         facingDirection = 1;
+        currentHealth = maxHealth;
+
     }
 
     void Update()
@@ -217,8 +226,32 @@ public class PlayerController : MonoBehaviour
         }
         else { return false; }
     }
-   
 
-    
+    public void Damage(float[] attackEnemyDetails)
+    {
+        currentHealth -= attackEnemyDetails[0];
+
+        rb.velocity = new Vector2(moveSpeed * hitSpeed.x * damageDirection, hitSpeed.y) ;       
+        animator.SetTrigger("hit");
+        if (currentHealth <= 0)
+        {
+            Dead();
+        }
+    }
+
+    private void Dead()
+    {
+        animator.SetBool("death", true);
+        //animator.SetBool("hit", false);
+        //boxcol.size = new Vector2(2, 1.4f);
+        //boxcol.size = new Vector2(2.1f, 1.5f);
+        boxcol.usedByEffector = true;
+       // transform.position = new Vector2(transform.position.x, transform.position.y+2f);
+        this.enabled = false;
+        boxcol.enabled = false;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+
+    }
+
 
 }

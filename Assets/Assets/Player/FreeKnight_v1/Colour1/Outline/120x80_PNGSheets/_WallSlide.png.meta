@@ -104,12 +104,12 @@ TextureImporter:
       name: _WallSlide_0
       rect:
         serializedVersion: 2
-        x: 48
-        y: 2
-        width: 22
-        height: 34
+        x: 0
+        y: 0
+        width: 120
+        height: 80
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -125,12 +125,12 @@ TextureImporter:
       name: _WallSlide_1
       rect:
         serializedVersion: 2
-        x: 168
-        y: 2
-        width: 22
-        height: 34
+        x: 120
+        y: 0
+        width: 120
+        height: 80
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -146,12 +146,12 @@ TextureImporter:
       name: _WallSlide_2
       rect:
         serializedVersion: 2
-        x: 288
-        y: 2
-        width: 22
-        height: 34
+        x: 240
+        y: 0
+        width: 120
+        height: 80
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

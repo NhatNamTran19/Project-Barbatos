@@ -18,7 +18,6 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private bool combatEnable;
     [SerializeField] private float inputTimer;
     [SerializeField] private float attack1Radius;
-    [SerializeField] private float attack1Damage;
     [SerializeField] private Transform attack1HitBoxPos;
     [SerializeField] private LayerMask damageAlbe;
 

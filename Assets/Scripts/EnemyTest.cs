@@ -13,11 +13,13 @@ public class EnemyTest : MonoBehaviour
     private int facingDirection;
     private int damageDirection;
     private float currentHealth;
-    private float hitStartTime;
+    private float[] attackEnemyDetails = new float[2];
+
 
     private bool groundDetected;
     private bool wallDetected;
     private bool detectTarget;
+
 
     [SerializeField] private AttackZone attackZone;
     [SerializeField] private DetectedZone detectedZone;
@@ -88,16 +90,15 @@ public class EnemyTest : MonoBehaviour
     {
         HasTarget = attackZone.detectedCollieders.Count > 0;
         detectTarget = detectedZone.detectedCollieders.Count > 0;
-        //AIEnemy();
-        Debug.Log(detectTarget);
+        Debug.Log(canMove);
         //Move();
+        ChasePlayer();
 
     }
     private void FixedUpdate()
     {
         CheckSurroundings();
         ChasePlayer();
-
     }
     private void ChasePlayer()
     {
@@ -181,7 +182,7 @@ public class EnemyTest : MonoBehaviour
     }
     private void Dead()
     {       
-            animator.SetBool("death", true);
+        animator.SetBool("death", true);
         //animator.SetBool("hit", false);
         boxcol.size = new Vector2(2, 1f);
         boxcol.offset = new Vector2(boxcol.offset.x, -1.5f);
@@ -193,13 +194,13 @@ public class EnemyTest : MonoBehaviour
     private void CheckAttackHitBox()
     {
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attack1HitBoxPos.position, attack1Radius, damageAlbe);
-        //attackDetails[0] = 10;
-        //attackDetails[1] = this.transform.position.x;
+        attackEnemyDetails[0] = 10;
+        attackEnemyDetails[1] = this.transform.position.x;
         foreach (Collider2D enemy in detectedObjects)
         {
             //collider.transform.parent.SendMessage("damage", attackDetails);
             Debug.Log("hit something");
-            //enemy.GetComponent<EnemyTest>().Damage(attackDetails);
+            enemy.GetComponent<PlayerController>().Damage(attackEnemyDetails);
             //collider.transform.parent.SendMessage("Damage", attackDetails);
         }
     }

@@ -113,10 +113,10 @@ TextureImporter:
       name: _Attack2_0
       rect:
         serializedVersion: 2
-        x: 42
+        x: 0
         y: 0
-        width: 38
-        height: 37
+        width: 120
+        height: 80
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,10 +134,10 @@ TextureImporter:
       name: _Attack2_1
       rect:
         serializedVersion: 2
-        x: 158
+        x: 120
         y: 0
-        width: 42
-        height: 37
+        width: 120
+        height: 80
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,10 +155,10 @@ TextureImporter:
       name: _Attack2_2
       rect:
         serializedVersion: 2
-        x: 273
+        x: 240
         y: 0
-        width: 77
-        height: 41
+        width: 120
+        height: 80
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,10 +176,10 @@ TextureImporter:
       name: _Attack2_3
       rect:
         serializedVersion: 2
-        x: 390
+        x: 360
         y: 0
-        width: 64
-        height: 36
+        width: 120
+        height: 80
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,10 +197,10 @@ TextureImporter:
       name: _Attack2_4
       rect:
         serializedVersion: 2
-        x: 510
+        x: 480
         y: 0
-        width: 46
-        height: 36
+        width: 120
+        height: 80
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,10 +218,10 @@ TextureImporter:
       name: _Attack2_5
       rect:
         serializedVersion: 2
-        x: 630
+        x: 600
         y: 0
-        width: 45
-        height: 36
+        width: 120
+        height: 80
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

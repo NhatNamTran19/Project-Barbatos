@@ -22,7 +22,7 @@ TagManager:
   - EnemyHitBox
   - Bullet
   - Damageable
-  - 
+  - DetectedZone
   - 
   - 
   - 
