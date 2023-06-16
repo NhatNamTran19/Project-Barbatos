@@ -17,15 +17,15 @@ public class PlayerCombatController : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     [SerializeField] private bool combatEnable;
     [SerializeField] private float inputTimer;
-    //[SerializeField] private float attack1Radius;
-    //[SerializeField] private Transform attack1HitBoxPos;
+    [SerializeField] private float attack1Radius;
+    [SerializeField] private Transform attack1HitBoxPos;
     [SerializeField] private LayerMask damageAlbe;
 
-    //private void Awake()
-    //{
-    //    animator = GetComponent<Animator>();
-    //    animator.SetBool("canAttack", combatEnable);
-    //}
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        animator.SetBool("canAttack", combatEnable);
+    }
     private void Start()
     {
         playerController = GetComponent<PlayerController>();
@@ -72,14 +72,14 @@ public class PlayerCombatController : MonoBehaviour
     }
     //private void CheckAttackHitBox()
     //{
-    //    Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attack1HitBoxPos.position,attack1Radius, damageAlbe);
+    //    Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attack1HitBoxPos.position, attack1Radius, damageAlbe);
     //    attackDetails[0] = 10;
     //    attackDetails[1] = this.transform.position.x;
     //    foreach (Collider2D enemy in detectedObjects)
     //    {
     //        //collider.transform.parent.SendMessage("damage", attackDetails);
     //        Debug.Log("hit something");
-    //        enemy.GetComponent<EnemyTest>().Damage(attackDetails);
+    //        enemy.GetComponent<EnemyTest>().Damage2(attackDetails);
     //        //collider.transform.parent.SendMessage("Damage", attackDetails);
     //    }
     //}

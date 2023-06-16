@@ -20,7 +20,7 @@ public class Damageable : MonoBehaviour
             EnemyTest Damage = collision.GetComponent<EnemyTest>();
             if (Damage != null)
             {
-                Damage.Damage2(damage);
+                Damage.Damage(damage);
             }
         }
         if (collision.CompareTag("Player"))

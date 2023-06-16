@@ -19,6 +19,8 @@ public class EnemyTest : MonoBehaviour
     private bool groundDetected;
     private bool wallDetected;
     private bool detectTarget;
+    private bool canDamage = true;
+    private bool isDamaging;
 
 
     [SerializeField] private AttackZone attackZone;
@@ -153,53 +155,81 @@ public class EnemyTest : MonoBehaviour
     {
         Gizmos.DrawLine(groundCheck.position, new Vector2(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
         Gizmos.DrawLine(wallCheck.position, new Vector2(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
-        Gizmos.DrawWireSphere(attack1HitBoxPos.position, attack1Radius);
+        //Gizmos.DrawWireSphere(attack1HitBoxPos.position, attack1Radius);
     }
 
-    public void Damage(float[] attackDetails)
-    {
-        currentHealth -= attackDetails[0];
+    //public void Damage2(float[] attackDetails)
+    //{
+    //    //if (!isDamaging)
+    //    //{
+    //    //    isDamaging = true;
 
-        if (attackDetails[1] < this.transform.position.x)
+    //    //}
+    //    currentHealth -= attackDetails[0];
+    //    if (attackDetails[1] < this.transform.position.x)
+    //    {
+    //        damageDirection = 2;
+    //    }
+    //    else
+    //    {
+    //        damageDirection = -2;
+    //    }
+    //    //Debug.Log(rb.velocity.x);
+    //    if (!HasTarget)
+    //    {
+    //        Flip();
+    //    }
+    //    movement.Set(hitSpeed.x * damageDirection, hitSpeed.y);
+    //    rb.velocity = movement;
+    //    rb.AddForce(movement);
+    //    Debug.Log("ZZZZ");
+    //    animator.SetTrigger("hit");
+    //    if (currentHealth <= 0)
+    //    {
+    //        Dead();
+    //    }
+    //}
+
+
+    public void Damage(float damage)
+    {
+        if (canDamage)
         {
-            damageDirection = 2;           
+            StartCoroutine(Damaging(damage));
+        }
+    }
+
+    private IEnumerator Damaging(float damage)
+    {
+        canDamage = false; //khi nhat vat luot, set = false de nhan vat ko luot lien tuc 2 lan
+        isDamaging = true; //ngan chan input cua nhan vat khi dang luot
+                           // float originaljumpForce = jumpForce;
+        float playerPotision = GetComponent<PlayerController>().transform.position.x;
+        currentHealth -= attackEnemyDetails[0];
+        if (playerPotision < this.transform.position.x)
+        {
+            damageDirection = 2;
         }
         else
         {
-            damageDirection = -2;           
+            damageDirection = -2;
         }
-        //Debug.Log(rb.velocity.x);
         if (!HasTarget)
         {
-            Flip();
+            Flip();            
         }
-        movement.Set(10f*damageDirection, hitSpeed.y);
+        movement.Set(0f, hitSpeed.y);
         rb.velocity = movement;
-             
         animator.SetTrigger("hit");
         if (currentHealth <= 0)
         {
             Dead();
         }
-    }
-    public void Damage2(float damage)
-    {
-        currentHealth -= damage;
-
-        
-        //Debug.Log(rb.velocity.x);
-        if (!HasTarget)
-        {
-            Flip();
-        }
-        movement.Set(10f*damageDirection, hitSpeed.y);
-        rb.velocity = movement;
-             
-        animator.SetTrigger("hit");
-        if (currentHealth <= 0)
-        {
-            Dead();
-        }
+        yield return new WaitForSeconds(0.15f); // khoang thoi gian khi nhan vat luot
+        isDamaging = false; // cho nhan vat di chuyen binh thuong
+        //jumpForce = originaljumpForce;
+        yield return new WaitForSeconds(.8f); //thoi gian cho de luot lan tiep theo
+        canDamage = true; // cho nhan vat luot lan tiep theo
     }
     private void Dead()
     {       
@@ -212,18 +242,18 @@ public class EnemyTest : MonoBehaviour
         this.enabled = false;
     }
     
-    private void CheckAttackHitBox()
-    {
-        Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attack1HitBoxPos.position, attack1Radius, damageAlbe);
-        attackEnemyDetails[0] = 10;
-        attackEnemyDetails[1] = this.transform.position.x;
-        foreach (Collider2D enemy in detectedObjects)
-        {
-            //collider.transform.parent.SendMessage("damage", attackDetails);
-            Debug.Log("hit something");
-            enemy.GetComponent<PlayerController>().Damage(attackEnemyDetails);
-            //collider.transform.parent.SendMessage("Damage", attackDetails);
-        }
-    }
+    //private void CheckAttackHitBox()
+    //{
+    //    Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attack1HitBoxPos.position, attack1Radius, damageAlbe);
+    //    attackEnemyDetails[0] = 10;
+    //    attackEnemyDetails[1] = this.transform.position.x;
+    //    foreach (Collider2D enemy in detectedObjects)
+    //    {
+    //        //collider.transform.parent.SendMessage("damage", attackDetails);
+    //        Debug.Log("hit something");
+    //        enemy.GetComponent<PlayerController>().Damage(attackEnemyDetails);
+    //        //collider.transform.parent.SendMessage("Damage", attackDetails);
+    //    }
+    //}
 }
 
