@@ -40,12 +40,12 @@ PrefabInstance:
     - target: {fileID: 1875099256750070797, guid: a2bc03b511aa9c048aab935e7a5c7de7,
         type: 3}
       propertyPath: maxHealth
-      value: 500
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 1875099256750070797, guid: a2bc03b511aa9c048aab935e7a5c7de7,
         type: 3}
       propertyPath: hitSpeed.x
-      value: 10
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 1875099256750070797, guid: a2bc03b511aa9c048aab935e7a5c7de7,
         type: 3}
@@ -56,6 +56,11 @@ PrefabInstance:
         type: 3}
       propertyPath: attack1HitBoxPos
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875099256750070801, guid: a2bc03b511aa9c048aab935e7a5c7de7,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1875099256750070806, guid: a2bc03b511aa9c048aab935e7a5c7de7,
         type: 3}

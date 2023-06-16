@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
     private int damageDirection;
     private float currentHealth;
-    private float[] attackEnemyDetails = new float[2];
+    public float[] attackEnemyDetails = new float[2];
 
     [SerializeField] private float maxHealth;
     [SerializeField] private float wallJumpForce;
@@ -77,8 +77,7 @@ public class PlayerController : MonoBehaviour
         UpdateState();
         Dashing();
         WallJump();
-        Debug.Log(scaleY);
-       
+        
     }
     private void FixedUpdate()
     {
@@ -88,9 +87,7 @@ public class PlayerController : MonoBehaviour
             Move();
         }
         CheckWallSliding();
-        SlideWall();
-        
-
+        SlideWall();   
     }
     private void Jump()
     {
@@ -241,7 +238,6 @@ public class PlayerController : MonoBehaviour
     public void Damage2(float attackEnemyDetails)
     {
         currentHealth -= attackEnemyDetails;
-
         rb.velocity = new Vector2(0f, hitSpeed.y) ;       
         animator.SetTrigger("hit");
         if (currentHealth <= 0)

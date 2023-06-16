@@ -9,6 +9,7 @@ public class EnemyTest : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private Transform transform;
+    private Collider2D playerPotision;
 
     private int facingDirection;
     private int damageDirection;
@@ -81,6 +82,7 @@ public class EnemyTest : MonoBehaviour
         boxcol = GetComponent<BoxCollider2D>();
         facingDirection = 1;
         currentHealth = maxHealth;
+        PlayerController playerPotision = GetComponent<PlayerController>();
     }
     void Start()
     {
@@ -92,7 +94,7 @@ public class EnemyTest : MonoBehaviour
     {
         HasTarget = attackZone.detectedCollieders.Count > 0;
         detectTarget = detectedZone.detectedCollieders.Count > 0;
-        Debug.Log(canMove);
+        //Debug.Log(canMove);
         //Move();
         ChasePlayer();
 
@@ -158,77 +160,73 @@ public class EnemyTest : MonoBehaviour
         //Gizmos.DrawWireSphere(attack1HitBoxPos.position, attack1Radius);
     }
 
-    //public void Damage2(float[] attackDetails)
-    //{
-    //    //if (!isDamaging)
-    //    //{
-    //    //    isDamaging = true;
-
-    //    //}
-    //    currentHealth -= attackDetails[0];
-    //    if (attackDetails[1] < this.transform.position.x)
-    //    {
-    //        damageDirection = 2;
-    //    }
-    //    else
-    //    {
-    //        damageDirection = -2;
-    //    }
-    //    //Debug.Log(rb.velocity.x);
-    //    if (!HasTarget)
-    //    {
-    //        Flip();
-    //    }
-    //    movement.Set(hitSpeed.x * damageDirection, hitSpeed.y);
-    //    rb.velocity = movement;
-    //    rb.AddForce(movement);
-    //    Debug.Log("ZZZZ");
-    //    animator.SetTrigger("hit");
-    //    if (currentHealth <= 0)
-    //    {
-    //        Dead();
-    //    }
-    //}
-
-
-    public void Damage(float damage)
+    public void Damage2(float[] attackDetails)
     {
-        if (canDamage)
+        currentHealth -= attackDetails[0];
+        if (attackDetails[1] < this.transform.position.x)
         {
-            StartCoroutine(Damaging(damage));
-        }
-    }
-
-    private IEnumerator Damaging(float damage)
-    {
-        canDamage = false; //khi nhat vat luot, set = false de nhan vat ko luot lien tuc 2 lan
-        isDamaging = true; //ngan chan input cua nhan vat khi dang luot
-                           // float originaljumpForce = jumpForce;
-        float playerPotision = GetComponent<PlayerController>().transform.position.x;
-        currentHealth -= attackEnemyDetails[0];
-        if (playerPotision < this.transform.position.x)
-        {
-            damageDirection = 2;
+            damageDirection = 200;
         }
         else
         {
-            damageDirection = -2;
+            damageDirection = -200;
         }
+        //Debug.Log(rb.velocity.x);
         if (!HasTarget)
         {
-            Flip();            
+            Flip();
         }
-        movement.Set(0f, hitSpeed.y);
+        movement.Set(hitSpeed.x * damageDirection, hitSpeed.y);
         rb.velocity = movement;
+        rb.AddForce(movement);
         animator.SetTrigger("hit");
         if (currentHealth <= 0)
         {
             Dead();
         }
-        yield return new WaitForSeconds(0.15f); // khoang thoi gian khi nhan vat luot
+    }
+
+
+    public void Damage(float[] attackEnemyDetails)
+    {
+        if (canDamage)
+        {
+            StartCoroutine(Damaging(attackEnemyDetails));
+            //Debug.Log(playerPotision.transform.position.x);
+        }
+    }
+
+    private IEnumerator Damaging(float[] attackDetails)
+    {
+        canDamage = false; //khi nhat vat luot, set = false de nhan vat ko luot lien tuc 2 lan
+        isDamaging = true; //ngan chan input cua nhan vat khi dang luot
+                           // float originaljumpForce = jumpForce;
+                           //currentHealth -= attackEnemyDetails[0];
+                           //if (attackEnemyDetails[1] < this.transform.position.x)
+                           //{
+                           //    damageDirection = 2;
+                           //}
+                           //else
+                           //{
+                           //    damageDirection = -2;
+                           //}
+                           //if (!HasTarget)
+                           //{
+                           //    Flip();            
+                           //}
+                           //Debug.Log("ZZZZ");
+                           //movement.Set(hitSpeed.x * damageDirection, hitSpeed.y);
+                           //rb.velocity = movement;
+                           //rb.AddForce(movement);
+                           //animator.SetTrigger("hit");
+        Damage2(attackDetails);
+        if (currentHealth <= 0)
+        {
+            Dead();
+        }
+        yield return new WaitForSeconds(0.2f); // khoang thoi gian khi nhan vat luot
         isDamaging = false; // cho nhan vat di chuyen binh thuong
-        //jumpForce = originaljumpForce;
-        yield return new WaitForSeconds(.8f); //thoi gian cho de luot lan tiep theo
+        yield return new WaitForSeconds(.5f); //thoi gian cho de luot lan tiep theo
         canDamage = true; // cho nhan vat luot lan tiep theo
     }
     private void Dead()
