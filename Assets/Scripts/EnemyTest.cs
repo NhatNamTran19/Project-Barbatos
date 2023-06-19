@@ -1,3 +1,4 @@
+using Assets.Scripts.Event;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -97,7 +98,6 @@ public class EnemyTest : MonoBehaviour
         //Debug.Log(canMove);
         //Move();
         ChasePlayer();
-
     }
     private void FixedUpdate()
     {
@@ -165,11 +165,11 @@ public class EnemyTest : MonoBehaviour
         currentHealth -= attackDetails[0];
         if (attackDetails[1] < this.transform.position.x)
         {
-            damageDirection = 200;
+            damageDirection = 20;
         }
         else
         {
-            damageDirection = -200;
+            damageDirection = -20;
         }
         //Debug.Log(rb.velocity.x);
         if (!HasTarget)
@@ -177,9 +177,11 @@ public class EnemyTest : MonoBehaviour
             Flip();
         }
         movement.Set(hitSpeed.x * damageDirection, hitSpeed.y);
-        rb.velocity = movement;
         rb.AddForce(movement);
+        rb.velocity = movement;
+        
         animator.SetTrigger("hit");
+        CharacterEvents.characterDamaged.Invoke(gameObject, attackDetails[0]);
         if (currentHealth <= 0)
         {
             Dead();

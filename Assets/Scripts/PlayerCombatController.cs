@@ -41,7 +41,7 @@ public class PlayerCombatController : MonoBehaviour
 
     private void CheckCombatInput()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z) &&!playerController.isDead)
         {
             if (combatEnable && !playerController.isSliding&& !playerController.isWall())
             {

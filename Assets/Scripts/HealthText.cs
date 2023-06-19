@@ -5,7 +5,7 @@ using UnityEngine;using TMPro;
 public class HealthText : MonoBehaviour
 {
     [SerializeField] private Vector3 moveSpeed = new Vector3(0,75,0);
-    [SerializeField] private float timeToFade = 2f;
+    [SerializeField] private float timeToFade = 1f;
 
     private float timeElapsed=0f;
     private Color startColor;

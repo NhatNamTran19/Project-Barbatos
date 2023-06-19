@@ -8,7 +8,7 @@ using UnityEngine;
 public class Damageable : MonoBehaviour
 {
     private Collider2D attackCollider;
-    [SerializeField] private float damage;
+    [SerializeField] public float damage;
     private float[] attackEnemyDetails = new float[2];
     [SerializeField] private GameObject player;
 

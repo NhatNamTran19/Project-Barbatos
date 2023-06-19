@@ -104,10 +104,10 @@ TextureImporter:
       name: _TurnAround_0
       rect:
         serializedVersion: 2
-        x: 46
+        x: 0
         y: 0
-        width: 29
-        height: 35
+        width: 120
+        height: 80
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,10 +125,10 @@ TextureImporter:
       name: _TurnAround_1
       rect:
         serializedVersion: 2
-        x: 166
+        x: 120
         y: 0
-        width: 27
-        height: 36
+        width: 120
+        height: 80
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,10 +146,10 @@ TextureImporter:
       name: _TurnAround_2
       rect:
         serializedVersion: 2
-        x: 287
+        x: 240
         y: 0
-        width: 25
-        height: 36
+        width: 120
+        height: 80
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -1,6 +1,8 @@
+using Assets.Scripts.Event;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
@@ -20,17 +22,19 @@ public class PlayerController : MonoBehaviour
     private float Right ;
     private bool isRuning;
     private bool isTurn;
+    private bool Turning= false;
     private bool canDash = true;
     private bool isDashing;
     public bool isSliding;
     private bool canSlide ;
     private bool isWallJump;
+    public bool isDead=false;
 
     private int damageDirection;
-    private float currentHealth;
+    public float currentHealth;
     public float[] attackEnemyDetails = new float[2];
 
-    [SerializeField] private float maxHealth;
+    [SerializeField] public float maxHealth;
     [SerializeField] private float wallJumpForce;
     [SerializeField] private float dashPower = 24f;
     [SerializeField] private float dashingTime = 0.4f;
@@ -61,7 +65,6 @@ public class PlayerController : MonoBehaviour
         scaleX = transform.localScale.x;
         facingDirection = 1;
         currentHealth = maxHealth;
-
     }
 
     void Update()
@@ -77,7 +80,7 @@ public class PlayerController : MonoBehaviour
         UpdateState();
         Dashing();
         WallJump();
-        
+
     }
     private void FixedUpdate()
     {
@@ -87,7 +90,7 @@ public class PlayerController : MonoBehaviour
             Move();
         }
         CheckWallSliding();
-        SlideWall();   
+        SlideWall();
     }
     private void Jump()
     {
@@ -107,6 +110,27 @@ public class PlayerController : MonoBehaviour
             canSlide = false;
         }
     }
+    IEnumerator LerpToRotation(float endRotation, float time, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        float startRotation = transform.rotation.eulerAngles.y;
+        float lerpRotation = startRotation;
+
+        float i = 0f;
+        float rate = 1 / time;
+        while (i <= 1)
+        {
+            i += Time.deltaTime * rate;
+
+            lerpRotation = Mathf.Lerp(startRotation, endRotation, i);
+            transform.rotation = Quaternion.Euler(0f, lerpRotation, 0f);
+            yield return null;
+        }
+        transform.rotation = Quaternion.Euler(0f, endRotation, 0f);
+        animator.SetTrigger("isTurn");
+
+    }
     private void flip()
     {
         if (dicX > 0)
@@ -117,7 +141,6 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3((-1) * scaleX, transform.localScale.y, transform.localScale.z);
         }
-
     }
     private void WallJump()
     {
@@ -152,6 +175,7 @@ public class PlayerController : MonoBehaviour
     {
         flip();
         rb.velocity = new Vector2(dicX * moveSpeed, rb.velocity.y);
+        
     }
     private void Dashing()
     {
@@ -240,7 +264,8 @@ public class PlayerController : MonoBehaviour
         currentHealth -= attackEnemyDetails;
         rb.velocity = new Vector2(0f, hitSpeed.y) ;       
         animator.SetTrigger("hit");
-        if (currentHealth <= 0)
+        CharacterEvents.characterDamaged.Invoke(gameObject, attackEnemyDetails);
+        if (currentHealth <= 0f)
         {
             Dead();
         }
@@ -249,6 +274,7 @@ public class PlayerController : MonoBehaviour
     private void Dead()
     {
         animator.SetBool("death", true);
+        isDead = true;
         //animator.SetBool("hit", false);
         //boxcol.size = new Vector2(2, 1.4f);
         //boxcol.size = new Vector2(2.1f, 1.5f);
@@ -259,6 +285,8 @@ public class PlayerController : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
     }
+
+    
 
 
 }
