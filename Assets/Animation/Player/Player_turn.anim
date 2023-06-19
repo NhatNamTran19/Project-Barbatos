@@ -22,17 +22,20 @@ AnimationClip:
     - time: 0
       value: {fileID: -3816084314835669757, guid: 9a6d9e5e493e8fa4082b9b8d81f49fa4,
         type: 3}
-    - time: 0.083333336
+    - time: 0.125
       value: {fileID: -5875445016746397521, guid: 9a6d9e5e493e8fa4082b9b8d81f49fa4,
         type: 3}
-    - time: 0.16666667
+    - time: 0.25
       value: {fileID: -7277774899269680841, guid: 9a6d9e5e493e8fa4082b9b8d81f49fa4,
+        type: 3}
+    - time: 0.375
+      value: {fileID: 8633238757646006001, guid: 12b61e035268bb541a05bc96783fe0cd,
         type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 12
+  m_SampleRate: 8
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -50,12 +53,13 @@ AnimationClip:
     - {fileID: -3816084314835669757, guid: 9a6d9e5e493e8fa4082b9b8d81f49fa4, type: 3}
     - {fileID: -5875445016746397521, guid: 9a6d9e5e493e8fa4082b9b8d81f49fa4, type: 3}
     - {fileID: -7277774899269680841, guid: 9a6d9e5e493e8fa4082b9b8d81f49fa4, type: 3}
+    - {fileID: 8633238757646006001, guid: 12b61e035268bb541a05bc96783fe0cd, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.25
+    m_StopTime: 0.5
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -74,4 +78,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.5
+    functionName: FlipAnim
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

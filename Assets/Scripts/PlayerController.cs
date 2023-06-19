@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask jumpGround;
     [SerializeField] private Vector2 hitSpeed;
 
+    private bool camMove = true;
+
 
 
     private enum MovementState 
@@ -80,6 +82,7 @@ public class PlayerController : MonoBehaviour
         UpdateState();
         Dashing();
         WallJump();
+        Debug.Log(rb.velocity.x);
 
     }
     private void FixedUpdate()
@@ -110,27 +113,25 @@ public class PlayerController : MonoBehaviour
             canSlide = false;
         }
     }
-    IEnumerator LerpToRotation(float endRotation, float time, float delay)
-    {
-        yield return new WaitForSeconds(delay);
+    //IEnumerator LerpToRotation(float endRotation, float time, float delay)
+    //{
+    //    yield return new WaitForSeconds(delay);
 
-        float startRotation = transform.rotation.eulerAngles.y;
-        float lerpRotation = startRotation;
+    //    float startRotation = transform.rotation.eulerAngles.y;
+    //    float lerpRotation = startRotation;
 
-        float i = 0f;
-        float rate = 1 / time;
-        while (i <= 1)
-        {
-            i += Time.deltaTime * rate;
+    //    float i = 0f;
+    //    float rate = 1 / time;
+    //    while (i <= 1)
+    //    {
+    //        i += Time.deltaTime * rate;
 
-            lerpRotation = Mathf.Lerp(startRotation, endRotation, i);
-            transform.rotation = Quaternion.Euler(0f, lerpRotation, 0f);
-            yield return null;
-        }
-        transform.rotation = Quaternion.Euler(0f, endRotation, 0f);
-        animator.SetTrigger("isTurn");
-
-    }
+    //        lerpRotation = Mathf.Lerp(startRotation, endRotation, i);
+    //        transform.rotation = Quaternion.Euler(0f, lerpRotation, 0f);
+    //        yield return null;
+    //    }
+    //    transform.rotation = Quaternion.Euler(0f, endRotation, 0f);
+    //}
     private void flip()
     {
         if (dicX > 0)
@@ -141,6 +142,12 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3((-1) * scaleX, transform.localScale.y, transform.localScale.z);
         }
+    }
+
+    private void FlipAnim()
+    {
+        Vector3 currentScale = transform.localScale;
+        transform.localScale = new Vector3((-1) * currentScale.x, transform.localScale.y, transform.localScale.z);
     }
     private void WallJump()
     {
@@ -173,9 +180,29 @@ public class PlayerController : MonoBehaviour
    
     private void Move()
     {
-        flip();
-        rb.velocity = new Vector2(dicX * moveSpeed, rb.velocity.y);
-        
+        if (camMove)
+        {
+            flip();
+            rb.velocity = new Vector2(dicX * moveSpeed, rb.velocity.y);
+        }
+
+        if ((transform.localScale.x == 1f && Input.GetKeyDown(KeyCode.LeftArrow))|| (transform.localScale.x == -1f && Input.GetKeyDown(KeyCode.RightArrow)))
+        {if (isGround())
+            { StartCoroutine(Anima()); }
+        }
+    }
+
+    IEnumerator Anima()
+    {
+        animator.SetTrigger("turn");
+
+        AnimatorClipInfo[] clip = animator.GetCurrentAnimatorClipInfo(0);
+        float m_CurrentClipLength = clip[0].clip.length;
+        camMove = false;
+        yield return new WaitForSeconds(m_CurrentClipLength);
+        camMove = true;
+        //transform.localScale = new Vector3(transform.localScale.x *(-1f), transform.localScale.y, transform.localScale.z);
+        rb.AddForce(new Vector2(-dicX, rb.velocity.y));
     }
     private void Dashing()
     {
@@ -248,17 +275,17 @@ public class PlayerController : MonoBehaviour
         else { return false; }
     }
 
-    public void Damage(float[] attackEnemyDetails)
-    {
-        currentHealth -= attackEnemyDetails[0];
+    //public void Damage(float[] attackEnemyDetails)
+    //{
+    //    currentHealth -= attackEnemyDetails[0];
 
-        rb.velocity = new Vector2(0f, hitSpeed.y) ;       
-        animator.SetTrigger("hit");
-        if (currentHealth <= 0)
-        {
-            Dead();
-        }
-    }
+    //    rb.velocity = new Vector2(0f, hitSpeed.y) ;       
+    //    animator.SetTrigger("hit");
+    //    if (currentHealth <= 0)
+    //    {
+    //        Dead();
+    //    }
+    //}
     public void Damage2(float attackEnemyDetails)
     {
         currentHealth -= attackEnemyDetails;
