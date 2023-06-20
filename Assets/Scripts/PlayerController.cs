@@ -29,10 +29,12 @@ public class PlayerController : MonoBehaviour
     private bool canSlide ;
     private bool isWallJump;
     public bool isDead=false;
+    private bool Jumping = false;
 
     private int damageDirection;
     public float currentHealth;
     public float[] attackEnemyDetails = new float[2];
+    private float maxY;
 
     [SerializeField] public float maxHealth;
     [SerializeField] private float wallJumpForce;
@@ -42,10 +44,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float moveSpeed;   
     [SerializeField] private float jumpForce;
     [SerializeField] private float GravityWall;
+    [SerializeField] private float damageFall;
     [SerializeField] private LayerMask jumpGround;
     [SerializeField] private Vector2 hitSpeed;
 
-    private bool camMove = true;
+    private bool canMove = true;
 
 
 
@@ -82,7 +85,7 @@ public class PlayerController : MonoBehaviour
         UpdateState();
         Dashing();
         WallJump();
-        Debug.Log(rb.velocity.x);
+       // Debug.Log(rb.velocity.y);
 
     }
     private void FixedUpdate()
@@ -94,12 +97,16 @@ public class PlayerController : MonoBehaviour
         }
         CheckWallSliding();
         SlideWall();
+        TakeDamgefall();
+        
     }
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump") && isGround() )
+        if (Input.GetButtonDown("Jump") && isGround() && canMove )
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            maxY = 0;
+            Jumping = true;
         }
     }
     private void CheckWallSliding()
@@ -180,14 +187,14 @@ public class PlayerController : MonoBehaviour
    
     private void Move()
     {
-        if (camMove)
+        if (canMove)
         {
             flip();
             rb.velocity = new Vector2(dicX * moveSpeed, rb.velocity.y);
         }
 
-        if ((transform.localScale.x == 1f && Input.GetKeyDown(KeyCode.LeftArrow))|| (transform.localScale.x == -1f && Input.GetKeyDown(KeyCode.RightArrow)))
-        {if (isGround())
+        if ((transform.localScale.x == 1f && Input.GetKeyDown(KeyCode.LeftArrow)) || (transform.localScale.x == -1f && Input.GetKeyDown(KeyCode.RightArrow)))
+        {if (isGround()&&(Mathf.Abs(rb.velocity.x) >10f)) 
             { StartCoroutine(Anima()); }
         }
     }
@@ -198,9 +205,9 @@ public class PlayerController : MonoBehaviour
 
         AnimatorClipInfo[] clip = animator.GetCurrentAnimatorClipInfo(0);
         float m_CurrentClipLength = clip[0].clip.length;
-        camMove = false;
+        canMove = false;
         yield return new WaitForSeconds(m_CurrentClipLength);
-        camMove = true;
+        canMove = true;
         //transform.localScale = new Vector3(transform.localScale.x *(-1f), transform.localScale.y, transform.localScale.z);
         rb.AddForce(new Vector2(-dicX, rb.velocity.y));
     }
@@ -211,12 +218,27 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Dash());
         }
     }
-    
-
-    private void Turn()
+     private void TakeDamgefall()
     {
-      
+        if (rb.velocity.y == 0 && Jumping)
+        {
+            Jumping = false;
+            if (maxY < -40f)
+            { DamageFall(); }
+        }
+        else if (Jumping)
+        {
+            if (rb.velocity.y < maxY)
+            { maxY = rb.velocity.y; }
+        }
     }
+
+    private void DamageFall()
+    {
+            float dam = (damageFall * Mathf.Floor((maxY + 40) / 10))*-1;
+            currentHealth -= dam;
+            CharacterEvents.characterDamaged.Invoke(gameObject, dam);
+    }  
 
     private void UpdateState()
      {
