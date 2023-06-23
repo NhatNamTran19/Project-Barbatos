@@ -12,6 +12,7 @@ public class EnemyTest : MonoBehaviour
     private Transform transform;
     private Collider2D playerPotision;
     [SerializeField] private HealthBarEnemy healthBarEnemy;
+    [SerializeField] private spawnSoul spawnSoul;
 
     private int facingDirection;
     private int damageDirection;
@@ -97,6 +98,7 @@ public class EnemyTest : MonoBehaviour
         HasTarget = attackZone.detectedCollieders.Count > 0;
         detectTarget = detectedZone.detectedCollieders.Count > 0;
         healthBarEnemy.SetHealth(currentHealth, maxHealth);
+       
 
         //Debug.Log(canMove);
         //Move();
@@ -187,6 +189,7 @@ public class EnemyTest : MonoBehaviour
         CharacterEvents.characterDamaged.Invoke(gameObject, attackDetails[0]);
         if (currentHealth <= 0)
         {
+            currentHealth = 0;
             Dead();
         }
     }
@@ -242,7 +245,12 @@ public class EnemyTest : MonoBehaviour
         boxcol.offset = new Vector2(boxcol.offset.x, -1.5f);
         boxcol.usedByEffector = true;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        this.enabled = false;
+        boxcol.enabled = false;
+        if (currentHealth <= 0)
+        {
+            spawnSoul.Spawn();
+            healthBarEnemy.gameObject.SetActive(false);
+        }
     }
     
     //private void CheckAttackHitBox()

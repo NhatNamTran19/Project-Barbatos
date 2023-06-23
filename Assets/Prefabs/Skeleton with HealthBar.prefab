@@ -115,7 +115,42 @@ PrefabInstance:
     - target: {fileID: 3309712446005102444, guid: f4ddfe1b03559214ba61f4c522a11b50,
         type: 3}
       propertyPath: m_Name
-      value: HealthBarEnemy
+      value: HealBarEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3309712446491849986, guid: f4ddfe1b03559214ba61f4c522a11b50,
+        type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3309712446491849986, guid: f4ddfe1b03559214ba61f4c522a11b50,
+        type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 1125581565}
+    - target: {fileID: 3309712446491849987, guid: f4ddfe1b03559214ba61f4c522a11b50,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 3309712446491849987, guid: f4ddfe1b03559214ba61f4c522a11b50,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3309712446636146043, guid: f4ddfe1b03559214ba61f4c522a11b50,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3309712447561223805, guid: f4ddfe1b03559214ba61f4c522a11b50,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3309712447561223805, guid: f4ddfe1b03559214ba61f4c522a11b50,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4ddfe1b03559214ba61f4c522a11b50, type: 3}
@@ -129,6 +164,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 287aa9f34dd19834fb808980ceb2592e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1125581565 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3309712446636146042, guid: f4ddfe1b03559214ba61f4c522a11b50,
+    type: 3}
+  m_PrefabInstance: {fileID: 3309712445546217351}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7957716729498740862
@@ -156,12 +203,12 @@ PrefabInstance:
     - target: {fileID: 1305394756805746860, guid: aa3c47feb03071c408d5b605e5ff78e7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.4910507
+      value: -0.49105072
       objectReference: {fileID: 0}
     - target: {fileID: 1305394756805746860, guid: aa3c47feb03071c408d5b605e5ff78e7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1700417
+      value: -5.170042
       objectReference: {fileID: 0}
     - target: {fileID: 1305394756805746860, guid: aa3c47feb03071c408d5b605e5ff78e7,
         type: 3}
@@ -206,7 +253,12 @@ PrefabInstance:
     - target: {fileID: 1305394756805746861, guid: aa3c47feb03071c408d5b605e5ff78e7,
         type: 3}
       propertyPath: m_Name
-      value: Skeleton with HealthBar
+      value: Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305394756805746871, guid: aa3c47feb03071c408d5b605e5ff78e7,
+        type: 3}
+      propertyPath: maxHealth
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1305394756805746871, guid: aa3c47feb03071c408d5b605e5ff78e7,
         type: 3}

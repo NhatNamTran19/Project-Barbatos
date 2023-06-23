@@ -21,12 +21,16 @@ public class HealthBarEnemy : MonoBehaviour
     public void SetHealth(float health,float maxHealth)
     {
         healthSlier.gameObject.SetActive(health < maxHealth);
-        healthSlier.value = health;
-        healthSlier.maxValue =  maxHealth;
+        healthSlier.value = CalPercentage(health , maxHealth);
+        //healthSlier.maxValue =  maxHealth;
 
         healthSlier.fillRect.GetComponentInChildren<Image>().color = Color.Lerp(Color.red, Color.green, healthSlier.normalizedValue);
+        
     }
-
+    private float CalPercentage(float currentHealth, float maxHealth)
+    {
+        return currentHealth / maxHealth;
+    }
 }
 
 
