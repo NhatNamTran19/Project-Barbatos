@@ -13,6 +13,9 @@ public class EnemyTest : MonoBehaviour
     private Collider2D playerPotision;
     [SerializeField] private HealthBarEnemy healthBarEnemy;
     [SerializeField] private spawnSoul spawnSoul;
+    [SerializeField] private GameObject hitParticle;
+    [SerializeField] private GameObject deathBloodParticle;
+    [SerializeField] private GameObject deathChunkParticle;
 
     private int facingDirection;
     private int damageDirection;
@@ -168,6 +171,7 @@ public class EnemyTest : MonoBehaviour
     public void Damage2(float[] attackDetails)
     {
         currentHealth -= attackDetails[0];
+        Instantiate(hitParticle, animator.transform.position, Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
         if (attackDetails[1] < this.transform.position.x)
         {
             damageDirection = 20;
@@ -184,7 +188,8 @@ public class EnemyTest : MonoBehaviour
         movement.Set(hitSpeed.x * damageDirection, hitSpeed.y);
         rb.AddForce(movement);
         rb.velocity = movement;
-        
+        Instantiate(deathBloodParticle, transform.position, deathBloodParticle.transform.rotation);
+
         animator.SetTrigger("hit");
         CharacterEvents.characterDamaged.Invoke(gameObject, attackDetails[0]);
         if (currentHealth <= 0)
@@ -238,7 +243,8 @@ public class EnemyTest : MonoBehaviour
         canDamage = true; // cho nhan vat luot lan tiep theo
     }
     private void Dead()
-    {       
+    {
+        Instantiate(deathChunkParticle, transform.position, deathChunkParticle.transform.rotation);
         animator.SetBool("death", true);
         //animator.SetBool("hit", false);
         boxcol.size = new Vector2(2, 1f);
