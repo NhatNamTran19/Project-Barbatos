@@ -32,8 +32,8 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 6437725491943126207}
-    m_Position: {x: 271, y: 189, z: 0}
+    m_State: {fileID: 8366018788753037755}
+    m_Position: {x: 306, y: 254, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -43,15 +43,15 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 6437725491943126207}
---- !u!1102 &6437725491943126207
+  m_DefaultState: {fileID: 8366018788753037755}
+--- !u!1102 &8366018788753037755
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Light5
+  m_Name: light5
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
