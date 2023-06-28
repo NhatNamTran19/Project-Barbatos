@@ -31,6 +31,8 @@ public class Damageable : MonoBehaviour
             if (Enemy != null)
             {      
                 Enemy.Damage(attackEnemyDetails);
+                CinemachineShake.Instance.ShakeCamera(2f, .1f);
+                //CameraShake.camInstance.StartCoroutine(CameraShake.camInstance.StartShake());
             }
         }
         if (collision.CompareTag("Player"))

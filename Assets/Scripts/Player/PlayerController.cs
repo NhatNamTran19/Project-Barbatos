@@ -48,6 +48,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask jumpGround;
     [SerializeField] private Vector2 hitSpeed;
 
+    [SerializeField] private ParticleSystem runDust;
+    [SerializeField] private ParticleSystem slideDust;
+
+    [Range(0, 10)]
+    [SerializeField]
+    private int occurAfterVelocity;
+
+    [Range(0, 0.2f)]
+    [SerializeField]
+    private float dustFormationPeriod;
+
+    private float counter;
+
+
     private bool canMove = true;
 
 
@@ -74,13 +88,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        
         if (isDashing)
         {
             return;
         }
-
+        counter += Time.deltaTime;
         dicX = Input.GetAxis("Horizontal");
-
         Jump();
         UpdateState();
         Dashing();
@@ -91,6 +105,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         
+
         if (!isWallJump)
         {
             Move();
@@ -98,7 +113,7 @@ public class PlayerController : MonoBehaviour
         CheckWallSliding();
         SlideWall();
         TakeDamgefall();
-        
+
     }
     private void Jump()
     {
@@ -120,25 +135,7 @@ public class PlayerController : MonoBehaviour
             canSlide = false;
         }
     }
-    //IEnumerator LerpToRotation(float endRotation, float time, float delay)
-    //{
-    //    yield return new WaitForSeconds(delay);
-
-    //    float startRotation = transform.rotation.eulerAngles.y;
-    //    float lerpRotation = startRotation;
-
-    //    float i = 0f;
-    //    float rate = 1 / time;
-    //    while (i <= 1)
-    //    {
-    //        i += Time.deltaTime * rate;
-
-    //        lerpRotation = Mathf.Lerp(startRotation, endRotation, i);
-    //        transform.rotation = Quaternion.Euler(0f, lerpRotation, 0f);
-    //        yield return null;
-    //    }
-    //    transform.rotation = Quaternion.Euler(0f, endRotation, 0f);
-    //}
+   
     private void flip()
     {
         if (dicX > 0)
@@ -192,10 +189,13 @@ public class PlayerController : MonoBehaviour
             flip();
             rb.velocity = new Vector2(dicX * moveSpeed, rb.velocity.y);
         }
-
+        
         if ((transform.localScale.x == 1f && Input.GetKeyDown(KeyCode.LeftArrow)) || (transform.localScale.x == -1f && Input.GetKeyDown(KeyCode.RightArrow)))
         {if (isGround()&&(Mathf.Abs(rb.velocity.x) >10f)) 
-            { StartCoroutine(Anima()); }
+            { StartCoroutine(Anima());
+                runDust.Play();
+                
+            }
         }
     }
 
@@ -258,13 +258,19 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.y>.1f)
         {
             movementState = MovementState.jumping;
+                        
         }
         else if(rb.velocity.y<-.1f)
         {
             movementState = MovementState.falling;
+            
         }
         animator.SetInteger("state",(int)movementState);
         animator.SetBool("slide", isSliding);
+        if(isSliding)
+        {
+            slideDust.Play();
+        }
     }
 
     private bool isGround()
@@ -333,6 +339,23 @@ public class PlayerController : MonoBehaviour
         boxcol.enabled = false;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
+    }
+
+    private void RunDust()
+    {
+        runDust.Play();
+    }
+    private void SlideDust()
+    {
+        if (isSliding && Mathf.Abs(rb.velocity.y) > occurAfterVelocity)
+        {
+            if (counter > dustFormationPeriod)
+            {
+                Debug.Log("aaa");
+                slideDust.Play();
+                counter = 0;
+            }
+        }
     }
 
     
