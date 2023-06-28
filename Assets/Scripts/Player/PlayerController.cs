@@ -224,7 +224,9 @@ public class PlayerController : MonoBehaviour
         {
             Jumping = false;
             if (maxY < -40f)
-            { DamageFall(); }
+            {           
+                DamageFall();
+            }
         }
         else if (Jumping)
         {
@@ -238,7 +240,8 @@ public class PlayerController : MonoBehaviour
             float dam = (damageFall * Mathf.Floor((maxY + 40) / 10))*-1;
             currentHealth -= dam;
             CharacterEvents.characterDamaged.Invoke(gameObject, dam);
-    }  
+            Debug.Log(dam);
+    }
 
     private void UpdateState()
      {
@@ -269,7 +272,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("slide", isSliding);
         if(isSliding)
         {
-            slideDust.Play();
+            SlideDust();        
         }
     }
 
@@ -338,7 +341,6 @@ public class PlayerController : MonoBehaviour
         this.enabled = false;
         boxcol.enabled = false;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
-
     }
 
     private void RunDust()

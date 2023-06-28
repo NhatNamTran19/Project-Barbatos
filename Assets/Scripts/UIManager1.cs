@@ -10,7 +10,6 @@ public class UIManager1 : MonoBehaviour
     [SerializeField]private GameObject healthTextPrefab;
     [SerializeField]private Canvas gameCanvas;
 
-
     private void Awake()
     {
         gameCanvas = FindObjectOfType<Canvas>();
