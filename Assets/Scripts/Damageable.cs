@@ -43,7 +43,11 @@ public class Damageable : MonoBehaviour
             }
         }
         if (collision.CompareTag("Player"))
-        {         
+        {
+            if (AudioManager.HasInstance)
+            {
+                AudioManager.Instance.PlaySE(AUDIO.SE_TAKEDAME);
+            }
             if (Player != null)
             {
                 Player.Damage2(damage);

@@ -45,6 +45,10 @@ public class PlayerCombatController : MonoBehaviour
         {
             if (combatEnable && !playerController.isSliding&& !playerController.isWall())
             {
+                if (AudioManager.HasInstance)
+                {
+                    AudioManager.Instance.PlaySE(AUDIO.SE_SLASH);
+                }
                 gotInput = true;
                 lastInputtime = Time.time;
             }

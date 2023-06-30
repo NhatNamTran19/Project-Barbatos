@@ -25,12 +25,12 @@ PrefabInstance:
     - target: {fileID: 1305394756805746860, guid: aa3c47feb03071c408d5b605e5ff78e7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32
+      value: 98.66955
       objectReference: {fileID: 0}
     - target: {fileID: 1305394756805746860, guid: aa3c47feb03071c408d5b605e5ff78e7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: -15.724206
       objectReference: {fileID: 0}
     - target: {fileID: 1305394756805746860, guid: aa3c47feb03071c408d5b605e5ff78e7,
         type: 3}
@@ -75,7 +75,7 @@ PrefabInstance:
     - target: {fileID: 1305394756805746861, guid: aa3c47feb03071c408d5b605e5ff78e7,
         type: 3}
       propertyPath: m_Name
-      value: Skeleton with HealthBarLV2
+      value: Skeleton with HealthBarLV2 (2)
       objectReference: {fileID: 0}
     - target: {fileID: 1305394756805746871, guid: aa3c47feb03071c408d5b605e5ff78e7,
         type: 3}
@@ -100,6 +100,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1962614393226834858, guid: a66c31b2b38380140a2b685105af7215,
         type: 3}
+    - target: {fileID: 7957716729354380026, guid: aa3c47feb03071c408d5b605e5ff78e7,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 7957716729841242261, guid: aa3c47feb03071c408d5b605e5ff78e7,
         type: 3}
       propertyPath: m_IsActive

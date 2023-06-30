@@ -148,7 +148,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1483301038872722123, guid: d51a56c311c3f784aac9bb5a2aba899c,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_UseNormalMap: 0
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
-  m_ShadowIntensity: 0.95
+  m_ShadowIntensity: 1
   m_ShadowVolumeIntensity: 0
   m_Mesh: {fileID: 0}
   m_PointLightInnerAngle: 360

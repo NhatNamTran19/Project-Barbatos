@@ -14,4 +14,6 @@
 	  public const string SE_TEST = "test";
 	  public const string SE_VICTORY = "victory";
 	  public const string SE_HIT = "hit";
+	  public const string SE_SLASH = "slash";
+	  public const string SE_TAKEDAME = "takedame";
 }
