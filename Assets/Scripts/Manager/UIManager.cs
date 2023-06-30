@@ -45,26 +45,15 @@ public class UIManager : BaseManager<UIManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if(GameManager.HasInstance && GameManager.Instance.IsPlaying)
             {
-                //GameManager.Instance.PauseGame();
+                GameManager.Instance.PauseGame();
                 ActivePausePanel(true);
             }
         }
-         if (Input.GetKeyDown(KeyCode.W))
-        {
-            if(GameManager.HasInstance && GameManager.Instance.IsPlaying)
-            {
-                //GameManager.Instance.ResumeGame();
-                ActivePausePanel(false);
-            }
-        }
-
-        Debug.Log(GameManager.HasInstance);
-        Debug.Log(UIManager.HasInstance);
-
+     
     }
 
     public void ActiveMenuPanel(bool active)

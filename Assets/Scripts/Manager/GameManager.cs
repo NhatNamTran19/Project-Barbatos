@@ -8,20 +8,21 @@ public class GameManager : BaseManager<GameManager>
 {
     //private const string CherryKey = "Cherry";
 
-    //private int cherries = 0;
-    //public int Cherries => cherries;
+    private int soul = 0;
+    public int Soul => soul;
+
     private bool isPlaying = false;
     public bool IsPlaying => isPlaying;
-
-    
-    public int Soul => _soul;
-    
-    private int _soul;
 
     protected override void Awake()
     {
         base.Awake();
         //cherries = PlayerPrefs.GetInt(CherryKey, 0);
+    }
+
+    public void UpdateSoul(int value)
+    {
+        soul = value;
     }
 
 
@@ -52,6 +53,7 @@ public class GameManager : BaseManager<GameManager>
     public void RestartGame()
     {
         ChangeScene("Menu");
+        SceneManager.LoadScene("StartScene");
         if (UIManager.HasInstance)
         {
             UIManager.Instance.ActiveMenuPanel(true);

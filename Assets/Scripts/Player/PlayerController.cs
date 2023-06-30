@@ -323,6 +323,10 @@ public class PlayerController : MonoBehaviour
         currentHealth -= attackEnemyDetails;
         rb.velocity = new Vector2(0f, hitSpeed.y) ;       
         animator.SetTrigger("hit");
+        if (AudioManager.HasInstance)
+        {
+            AudioManager.Instance.PlaySE(AUDIO.SE_HIT);
+        }
         CharacterEvents.characterDamaged.Invoke(this.gameObject, attackEnemyDetails);
         if (currentHealth <= 0f)
         {

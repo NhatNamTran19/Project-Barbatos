@@ -139,7 +139,7 @@ public class EnemyTest : MonoBehaviour
 
     private void Move()
     {
-        if ((!groundDetected && rb.velocity.y >= 0) || wallDetected)
+        if ((!groundDetected && Mathf.Abs( rb.velocity.y) >= 0) || wallDetected)
         {
             Flip();
         }

@@ -10,6 +10,6 @@ public class spawnSoul : MonoBehaviour
 
     public void Spawn()
     {
-            SpawnGO = Instantiate(spawnObject, spawnPoint);
+     SpawnGO = Instantiate(spawnObject, spawnPoint);
     }
 }

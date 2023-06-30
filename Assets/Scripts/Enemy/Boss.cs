@@ -11,6 +11,8 @@ public class Boss : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Transform transform;
     private Collider2D playerPotision;
+
+    [SerializeField] private spawnSoul spawnSoul;
     [SerializeField] private HealthBarBoss healthBarBoss;
     [SerializeField] private GameObject hitParticle;
     [SerializeField] private GameObject deathBloodParticle;
@@ -48,8 +50,10 @@ public class Boss : MonoBehaviour
     [SerializeField] private LayerMask whatIsGround;
     private int curWayPointIndex = 0;
     private Vector2 movement;
+    private GameObject runtimeSpawnGO;
 
-   
+
+
     [SerializeField] private LayerMask damageAlbe;
 
 
@@ -111,12 +115,18 @@ public class Boss : MonoBehaviour
         //Debug.Log(canMove);
         //Move();
         ChasePlayer();
+        DestroyGO();
     }
 
     private void Shoot()
     {
-        Instantiate(projectile1,projectilePos.position,Quaternion.identity);
+        runtimeSpawnGO = Instantiate(projectile1,projectilePos.position,Quaternion.identity);
     }
+    public void DestroyGO()
+    {
+        Destroy(runtimeSpawnGO, 8f);
+    } 
+    
 
     private void FixedUpdate()
     {
@@ -214,11 +224,12 @@ public class Boss : MonoBehaviour
         Instantiate(deathBloodParticle, transform.position, deathBloodParticle.transform.rotation);
         animator.SetTrigger("hit");
         //OnHit();
-        //CharacterEvents.characterDamaged.Invoke(gameObject, attackDetails[0]);
+        CharacterEvents.characterDamaged.Invoke(gameObject, attackDetails[0]);
         if (currentHealth <= 0)
         {
             currentHealth = 0;
             Dead();
+            spawnSoul.Spawn();
         }
     }
 
@@ -269,17 +280,14 @@ public class Boss : MonoBehaviour
     {
         //Instantiate(deathChunkParticle, transform.position, deathChunkParticle.transform.rotation);
         animator.SetBool("death", true);
+
         //animator.SetBool("hit", false);
         //boxcol.size = new Vector2(2, 1f);
         //boxcol.offset = new Vector2(boxcol.offset.x, -1.5f);
         //boxcol.usedByEffector = true;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         boxcol.enabled = false;
-        //if (currentHealth <= 0)
-        //{
-        //    //spawnSoul.Spawn();
-        //    //ealthBarEnemy.gameObject.SetActive(false);
-        //}
+        
     }
     
     //private void CheckAttackHitBox()
