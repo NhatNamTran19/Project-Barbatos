@@ -229,7 +229,6 @@ public class Boss : MonoBehaviour
         {
             currentHealth = 0;
             Dead();
-            spawnSoul.Spawn();
         }
     }
 
@@ -270,6 +269,7 @@ public class Boss : MonoBehaviour
         if (currentHealth <= 0)
         {
             Dead();
+            spawnSoul.Spawn();
         }
         yield return new WaitForSeconds(0.2f); // khoang thoi gian khi nhan vat luot
         isDamaging = false; // cho nhan vat di chuyen binh thuong
@@ -280,7 +280,6 @@ public class Boss : MonoBehaviour
     {
         //Instantiate(deathChunkParticle, transform.position, deathChunkParticle.transform.rotation);
         animator.SetBool("death", true);
-
         //animator.SetBool("hit", false);
         //boxcol.size = new Vector2(2, 1f);
         //boxcol.offset = new Vector2(boxcol.offset.x, -1.5f);

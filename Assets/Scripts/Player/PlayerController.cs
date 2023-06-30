@@ -335,6 +335,11 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("death", true);
         isDead = true;
+            if (GameManager.HasInstance && GameManager.Instance.IsPlaying)
+            {
+                GameManager.Instance.PauseGame();
+                UIManager.Instance.ActiveLosePanel(true);
+            }
         //animator.SetBool("hit", false);
         //boxcol.size = new Vector2(2, 1.4f);
         //boxcol.size = new Vector2(2.1f, 1.5f);
