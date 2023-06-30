@@ -16,9 +16,8 @@ public class ItemCollector : MonoBehaviour
     {
         if(GameManager.Instance != null)
         {
-            key = GameManager.Instance.Key;
-            _lock = GameManager.Instance.Lock;
-            soul = GameManager.Instance.Soul;
+           
+            //soul = GameManager1.Instance.Soul;
         }
     }
 

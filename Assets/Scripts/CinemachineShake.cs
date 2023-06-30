@@ -28,7 +28,7 @@ public class CinemachineShake : MonoBehaviour
         if (shakeTime > 0)
         {
             //Debug.Log(Mathf.Lerp(startIntensity, 0f, shakeTime / shakeTimeTotal));
-            Debug.Log(shakeTime / shakeTimeTotal);
+
 
             shakeTime -= Time.deltaTime;
             if (shakeTime <= 0f)

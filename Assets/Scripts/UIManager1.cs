@@ -26,9 +26,9 @@ public class UIManager1 : MonoBehaviour
     }
     public void CharacterTookDamage(GameObject character, float damgaeRecuived)
     {
-        Vector3 spawnPosition = Camera.main.WorldToScreenPoint(character.transform.position);  
+        Vector3 spawnPosition = Camera.main.WorldToScreenPoint(character.transform.position); 
 
-        TMP_Text tmpText = Instantiate(damageTextPrefab,spawnPosition, Quaternion.identity,gameCanvas.transform).GetComponent<TMP_Text>();
+        TMP_Text tmpText = Instantiate(damageTextPrefab, spawnPosition, Quaternion.identity,gameCanvas.transform).GetComponent<TMP_Text>();
         tmpText.text = "-"+damgaeRecuived.ToString();
     }
 

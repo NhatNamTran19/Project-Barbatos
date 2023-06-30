@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Paralax : MonoBehaviour
 {
+    [SerializeField] private float size;
     [SerializeField]
     public GameObject player;
     [SerializeField]
@@ -14,7 +15,7 @@ public class Paralax : MonoBehaviour
     void Start()
     {
         startPoint = transform.position.x;
-        length = (GetComponent<SpriteRenderer>().bounds.size.x)-6f;
+        length = (GetComponent<SpriteRenderer>().bounds.size.x)+size;
     }
 
     // Update is called once per frame

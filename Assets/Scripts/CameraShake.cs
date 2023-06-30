@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraShake : MonoBehaviour
+public class CameraShake1 : MonoBehaviour
 {
     //public static CameraShake camInstance;
     public AnimationCurve curve;

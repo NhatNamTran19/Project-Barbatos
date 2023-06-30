@@ -13,11 +13,9 @@ public class GameManager : BaseManager<GameManager>
     private bool isPlaying = false;
     public bool IsPlaying => isPlaying;
 
-    public int Key => _key;
-    public int Lock => _lock;
+    
     public int Soul => _soul;
-    private int _key;
-    private int _lock;
+    
     private int _soul;
 
     protected override void Awake()

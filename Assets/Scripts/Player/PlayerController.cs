@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     public float currentHealth;
     public float[] attackEnemyDetails = new float[2];
     private float maxY;
+    private float dam;
 
     [SerializeField] public float maxHealth;
     [SerializeField] private float wallJumpForce;
@@ -99,8 +100,9 @@ public class PlayerController : MonoBehaviour
         UpdateState();
         Dashing();
         WallJump();
-       // Debug.Log(rb.velocity.y);
-
+        // Debug.Log(rb.velocity.y);
+        TakeDamgefall();
+        Debug.Log(isGround());
     }
     private void FixedUpdate()
     {
@@ -112,7 +114,6 @@ public class PlayerController : MonoBehaviour
         }
         CheckWallSliding();
         SlideWall();
-        TakeDamgefall();
 
     }
     private void Jump()
@@ -190,7 +191,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(dicX * moveSpeed, rb.velocity.y);
         }
         
-        if ((transform.localScale.x == 1f && Input.GetKeyDown(KeyCode.LeftArrow)) || (transform.localScale.x == -1f && Input.GetKeyDown(KeyCode.RightArrow)))
+        if ((transform.localScale.x > 0f && Input.GetKeyDown(KeyCode.LeftArrow)) || (transform.localScale.x < 0f && Input.GetKeyDown(KeyCode.RightArrow)))
         {if (isGround()&&(Mathf.Abs(rb.velocity.x) >10f)) 
             { StartCoroutine(Anima());
                 runDust.Play();
@@ -226,6 +227,7 @@ public class PlayerController : MonoBehaviour
             if (maxY < -40f)
             {           
                 DamageFall();
+                CharacterEvents.characterDamaged.Invoke(gameObject, dam);
             }
         }
         else if (Jumping)
@@ -237,9 +239,8 @@ public class PlayerController : MonoBehaviour
 
     private void DamageFall()
     {
-            float dam = (damageFall * Mathf.Floor((maxY + 40) / 10))*-1;
-            currentHealth -= dam;
-            CharacterEvents.characterDamaged.Invoke(gameObject, dam);
+            dam = (damageFall * Mathf.Floor((maxY + 40) / 10))*-1;
+            currentHealth -= dam;          
             Debug.Log(dam);
     }
 
@@ -322,7 +323,7 @@ public class PlayerController : MonoBehaviour
         currentHealth -= attackEnemyDetails;
         rb.velocity = new Vector2(0f, hitSpeed.y) ;       
         animator.SetTrigger("hit");
-        CharacterEvents.characterDamaged.Invoke(gameObject, attackEnemyDetails);
+        CharacterEvents.characterDamaged.Invoke(this.gameObject, attackEnemyDetails);
         if (currentHealth <= 0f)
         {
             Dead();

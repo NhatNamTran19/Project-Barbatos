@@ -10,9 +10,9 @@ public class Return : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Return"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            camera.enabled = true;
+            camera.Follow = player.transform;
         }
     }
 }
