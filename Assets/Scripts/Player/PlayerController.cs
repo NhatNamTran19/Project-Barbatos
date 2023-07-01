@@ -84,7 +84,11 @@ public class PlayerController : MonoBehaviour
         boxcol = GetComponent<BoxCollider2D>();
         scaleX = transform.localScale.x;
         facingDirection = 1;
-        currentHealth = maxHealth;
+        if (GameManager.Instance != null)
+        {
+            maxHealth = GameManager.Instance.maxHP;
+            currentHealth = GameManager.Instance.HpPlayer;
+        }
     }
 
     void Update()
@@ -240,8 +244,12 @@ public class PlayerController : MonoBehaviour
     private void DamageFall()
     {
             dam = (damageFall * Mathf.Floor((maxY + 40) / 10))*-1;
-            currentHealth -= dam;          
-            Debug.Log(dam);
+            currentHealth -= dam;
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.UpdateHpPlayer(currentHealth);
+        }
+        Debug.Log(dam);
     }
 
     private void UpdateState()
@@ -321,6 +329,10 @@ public class PlayerController : MonoBehaviour
     public void Damage2(float attackEnemyDetails)
     {
         currentHealth -= attackEnemyDetails;
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.UpdateHpPlayer(currentHealth);
+        }
         rb.velocity = new Vector2(0f, hitSpeed.y) ;       
         animator.SetTrigger("hit");
        

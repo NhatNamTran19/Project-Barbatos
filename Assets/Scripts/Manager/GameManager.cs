@@ -11,18 +11,29 @@ public class GameManager : BaseManager<GameManager>
     private int soul = 0;
     public int Soul => soul;
 
+    public float maxHP = 500;
+    private float hpPlayer;
+    public float HpPlayer => hpPlayer;
+
+
+
     private bool isPlaying = false;
     public bool IsPlaying => isPlaying;
 
     protected override void Awake()
     {
         base.Awake();
+        hpPlayer = maxHP;
         //cherries = PlayerPrefs.GetInt(CherryKey, 0);
     }
 
     public void UpdateSoul(int value)
     {
         soul = value;
+    }
+    public void UpdateHpPlayer(float value)
+    {
+        hpPlayer = value;
     }
 
 
