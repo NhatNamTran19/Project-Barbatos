@@ -46,13 +46,14 @@ public class PlayerCombatController : MonoBehaviour
             if (combatEnable && !playerController.isSliding&& !playerController.isWall())
             {
                 if (AudioManager.HasInstance)
-                {
-                    AudioManager.Instance.PlaySE(AUDIO.SE_SLASH);
+                {                   
+                        AudioManager.Instance.PlaySE(AUDIO.SE_SLASH);                    
                 }
                 gotInput = true;
                 lastInputtime = Time.time;
             }
         }
+        
     }
     private void CheckAttacks()
     {
@@ -61,18 +62,24 @@ public class PlayerCombatController : MonoBehaviour
             if(!isAttacking)
             {
                 gotInput = false;
+                if (playerController.isGround())
+                {
+                    playerController.canMove = false;
+                    playerController.rb.velocity = Vector2.zero;
+                }
                 isAttacking = true;
                 isFirstAttack = !isFirstAttack;
                 animator.SetBool("attk1", true);
                 animator.SetBool("firstAttack", isFirstAttack);
                 animator.SetBool("isAttacking", isAttacking);
-
             }
+            
         }
         if(Time.time >= lastInputtime+ inputTimer) 
         {
             gotInput = false;
         }
+        
     }
     //private void CheckAttackHitBox()
     //{
@@ -90,6 +97,8 @@ public class PlayerCombatController : MonoBehaviour
     private void FinishAttack1()
     {
         isAttacking= false;
+        playerController.canMove = true;
+        playerController.Move();
         animator.SetBool("isAttacking", isAttacking);
         animator.SetBool("attk1", false);
     }

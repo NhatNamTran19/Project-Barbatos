@@ -16,4 +16,9 @@
 	  public const string SE_HIT = "hit";
 	  public const string SE_SLASH = "slash";
 	  public const string SE_TAKEDAME = "takedame";
+	  public const string SE_LAND = "land";
+	  public const string SE_LAND2 = "land2";
+	  public const string SE_SLIDING = "sliding";
+	  public const string SE_SLIDINGCUT = "slidingcut";
+	  public const string SE_SLIDINGCUT2 = "slidingcut2";
 }

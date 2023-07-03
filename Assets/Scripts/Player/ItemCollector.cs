@@ -15,7 +15,6 @@ public class ItemCollector : MonoBehaviour
     {
         if(GameManager.Instance != null)
         {
-           
             soul = GameManager.Instance.Soul;
         }
     }

@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private BoxCollider2D boxcol;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -63,8 +63,7 @@ public class PlayerController : MonoBehaviour
     private float counter;
 
 
-    private bool canMove = true;
-
+    public bool canMove = true;
 
 
     private enum MovementState 
@@ -124,6 +123,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && isGround() && canMove )
         {
+            if (AudioManager.HasInstance)
+            {
+                    AudioManager.Instance.PlaySE(AUDIO.SE_JUMP);
+                
+            }
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             maxY = 0;
             Jumping = true;
@@ -163,6 +167,10 @@ public class PlayerController : MonoBehaviour
         if(Input.GetButtonDown("Jump")&&isSliding)
         {
             isWallJump = true;
+            if (AudioManager.HasInstance)
+            {
+                AudioManager.Instance.PlaySE(AUDIO.SE_JUMP);
+            }
             //Vector2 force = new Vector2(-dicX*wallJumpForce, jumpForce);
             rb.velocity = new Vector2(-dicX*wallJumpForce, jumpForce);
             //rb.velocity = Vector2.zero;
@@ -178,16 +186,25 @@ public class PlayerController : MonoBehaviour
     {
         if (isWall() && canSlide)
         {
-            isSliding = true;
+            isSliding = true;           
             rb.velocity = new Vector2(rb.velocity.x, -GravityWall);
         }
         if (isGround() || !isWall())
         {
             isSliding = false;
         }
+        
     }
-   
-    private void Move()
+    IEnumerator AudioStop()
+    {if (AudioManager.Instance.AttachSESource.isPlaying && !isSliding)
+        {
+            AudioManager.Instance.AttachSESource.Stop();
+        }
+        yield return new WaitForSeconds(.1f);
+        AudioManager.Instance.AttachSESource.Play();
+    }
+
+    public void Move()
     {
         if (canMove)
         {
@@ -196,7 +213,7 @@ public class PlayerController : MonoBehaviour
         }
         
         if ((transform.localScale.x > 0f && Input.GetKeyDown(KeyCode.LeftArrow)) || (transform.localScale.x < 0f && Input.GetKeyDown(KeyCode.RightArrow)))
-        {if (isGround()&&(Mathf.Abs(rb.velocity.x) >10f)) 
+        {if (isGround()&&(Mathf.Abs(rb.velocity.x) >15f)) 
             { StartCoroutine(Anima());
                 runDust.Play();
                 
@@ -228,6 +245,12 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.y == 0 && Jumping)
         {
             Jumping = false;
+            if (AudioManager.HasInstance)
+            {
+                
+                    AudioManager.Instance.PlaySE(AUDIO.SE_LAND);
+                
+            }
             if (maxY < -40f)
             {           
                 DamageFall();
@@ -285,7 +308,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private bool isGround()
+    public bool isGround()
     {
         return Physics2D.BoxCast(boxcol.bounds.center, boxcol.bounds.size, 0f, Vector2.down, 0.1f, jumpGround);
     }

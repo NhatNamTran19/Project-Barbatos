@@ -32,8 +32,8 @@ public class Damageable : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             if (AudioManager.HasInstance)
-            {
-                AudioManager.Instance.PlaySE(AUDIO.SE_HIT);
+            {              
+                   AudioManager.Instance.PlaySE(AUDIO.SE_HIT);               
             }
             if (Enemy != null)
             {      

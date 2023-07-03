@@ -64,6 +64,10 @@ public class AudioManager : BaseManager<AudioManager>
     {
         AttachSESource.PlayOneShot(seDic[nextSEName] as AudioClip);
     }
+    public void Stop()
+    {
+        AttachSESource.Stop();
+    }
 
     public void PlayBGM(string bgmName, float fadeSpeedRate = CONST.BGM_FADE_SPEED_RATE_HIGH)
     {
