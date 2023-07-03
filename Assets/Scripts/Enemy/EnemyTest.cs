@@ -28,6 +28,7 @@ public class EnemyTest : MonoBehaviour
     private bool detectTarget;
     private bool canDamage = true;
     private bool isDamaging;
+    private bool isAttack;
 
 
     [SerializeField] private AttackZone attackZone;
@@ -101,11 +102,11 @@ public class EnemyTest : MonoBehaviour
         HasTarget = attackZone.detectedCollieders.Count > 0;
         detectTarget = detectedZone.detectedCollieders.Count > 0;
         healthBarEnemy.SetHealth(currentHealth, maxHealth);
-       
 
-        //Debug.Log(canMove);
-        //Move();
-        ChasePlayer();
+        CheckAttk();
+            //Debug.Log(canMove);
+            //Move();
+            ChasePlayer();
     }
     private void FixedUpdate()
     {
@@ -114,7 +115,7 @@ public class EnemyTest : MonoBehaviour
     }
     private void ChasePlayer()
     {
-        if (detectTarget && groundDetected)
+        if (detectTarget && groundDetected &&!isAttack)
         {
             movement.Set(movingSpeed *2.5f* facingDirection, rb.velocity.y);
             rb.velocity = movement;
@@ -123,6 +124,19 @@ public class EnemyTest : MonoBehaviour
         {
             CanMove();
         }
+    }
+    private void CheckAttk()
+    {
+        if (HasTarget)
+        {
+            isAttack = true;
+            rb.velocity = Vector2.zero;
+        }
+    }
+    private void FinishAttack1()
+    {
+        isAttack = false;       
+        Move();       
     }
 
     private void CanMove()

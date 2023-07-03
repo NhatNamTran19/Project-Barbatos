@@ -7,6 +7,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1305394755758336936, guid: aa3c47feb03071c408d5b605e5ff78e7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305394755758336936, guid: aa3c47feb03071c408d5b605e5ff78e7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305394756797992886, guid: aa3c47feb03071c408d5b605e5ff78e7,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 5.2254515
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305394756797992886, guid: aa3c47feb03071c408d5b605e5ff78e7,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -2.7483106
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305394756805746856, guid: aa3c47feb03071c408d5b605e5ff78e7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 1305394756805746860, guid: aa3c47feb03071c408d5b605e5ff78e7,
         type: 3}
       propertyPath: m_RootOrder
@@ -15,12 +40,12 @@ PrefabInstance:
     - target: {fileID: 1305394756805746860, guid: aa3c47feb03071c408d5b605e5ff78e7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.1
+      value: -14.7
       objectReference: {fileID: 0}
     - target: {fileID: 1305394756805746860, guid: aa3c47feb03071c408d5b605e5ff78e7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.82
+      value: -16.7
       objectReference: {fileID: 0}
     - target: {fileID: 1305394756805746860, guid: aa3c47feb03071c408d5b605e5ff78e7,
         type: 3}
@@ -65,7 +90,12 @@ PrefabInstance:
     - target: {fileID: 1305394756805746861, guid: aa3c47feb03071c408d5b605e5ff78e7,
         type: 3}
       propertyPath: m_Name
-      value: Skeleton with HealthBar
+      value: Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305394756805746871, guid: aa3c47feb03071c408d5b605e5ff78e7,
+        type: 3}
+      propertyPath: wallCheckDistance
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa3c47feb03071c408d5b605e5ff78e7, type: 3}
