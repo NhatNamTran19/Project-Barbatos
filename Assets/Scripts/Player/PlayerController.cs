@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float damageFall;
     [SerializeField] private LayerMask jumpGround;
     [SerializeField] private Vector2 hitSpeed;
+    [SerializeField] private AudioSource SLidingsound;
 
     [SerializeField] private ParticleSystem runDust;
     [SerializeField] private ParticleSystem slideDust;
@@ -88,6 +89,7 @@ public class PlayerController : MonoBehaviour
             maxHealth = GameManager.Instance.maxHP;
             currentHealth = GameManager.Instance.HpPlayer;
         }
+        SLidingsound = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -188,21 +190,19 @@ public class PlayerController : MonoBehaviour
         {
             isSliding = true;           
             rb.velocity = new Vector2(rb.velocity.x, -GravityWall);
+            if(!SLidingsound.isPlaying)
+            {
+                SLidingsound.Play();
+            }
         }
         if (isGround() || !isWall())
         {
             isSliding = false;
+            SLidingsound.Stop();
         }
         
     }
-    IEnumerator AudioStop()
-    {if (AudioManager.Instance.AttachSESource.isPlaying && !isSliding)
-        {
-            AudioManager.Instance.AttachSESource.Stop();
-        }
-        yield return new WaitForSeconds(.1f);
-        AudioManager.Instance.AttachSESource.Play();
-    }
+    
 
     public void Move()
     {

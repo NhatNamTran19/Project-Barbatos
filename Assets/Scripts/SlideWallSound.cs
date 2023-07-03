@@ -56,9 +56,9 @@ public class SlideWallSound : MonoBehaviour
                 }
             }
         }
-        if (!isWall())
+        if (isGround()||!isWall())
         {
-            //AudioManager.Instance.AttachSESource.Stop();
+            AudioManager.Instance.AttachSESource.Stop();
         }
 
     }
