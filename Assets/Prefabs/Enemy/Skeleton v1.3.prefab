@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 1305394756805746860}
-  spawnObject: {fileID: 8560592288332838360, guid: d65668ff7b6f42540861f5d26d68b557,
+  spawnObject: {fileID: 8560592288332838360, guid: f8320b1c6b9ba494da9a552d07d7a841,
     type: 3}
 --- !u!1001 &583217576302066874
 PrefabInstance:
@@ -71,7 +71,7 @@ PrefabInstance:
     - target: {fileID: 1875099256741016332, guid: a2bc03b511aa9c048aab935e7a5c7de7,
         type: 3}
       propertyPath: m_Size.x
-      value: 8.878736
+      value: 5.7697525
       objectReference: {fileID: 0}
     - target: {fileID: 1875099256741016332, guid: a2bc03b511aa9c048aab935e7a5c7de7,
         type: 3}
@@ -81,7 +81,7 @@ PrefabInstance:
     - target: {fileID: 1875099256741016332, guid: a2bc03b511aa9c048aab935e7a5c7de7,
         type: 3}
       propertyPath: m_Offset.x
-      value: -1.975307
+      value: -3.1466331
       objectReference: {fileID: 0}
     - target: {fileID: 1875099256741016332, guid: a2bc03b511aa9c048aab935e7a5c7de7,
         type: 3}
@@ -112,8 +112,13 @@ PrefabInstance:
         type: 3}
       propertyPath: hitParticle
       value: 
-      objectReference: {fileID: 7995185684918372397, guid: 6d4ea2184ee3ac0458d683123201e4ac,
+      objectReference: {fileID: 7995185684918372397, guid: 67098143d08f6de48a860e741dabeb3c,
         type: 3}
+    - target: {fileID: 1875099256750070797, guid: a2bc03b511aa9c048aab935e7a5c7de7,
+        type: 3}
+      propertyPath: movingSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1875099256750070797, guid: a2bc03b511aa9c048aab935e7a5c7de7,
         type: 3}
       propertyPath: healthBarEnemy
@@ -128,13 +133,13 @@ PrefabInstance:
         type: 3}
       propertyPath: deathBloodParticle
       value: 
-      objectReference: {fileID: 5096148057906189823, guid: b3a2d15a676d99f4b8896599b6ea7ef8,
+      objectReference: {fileID: 5096148057906189823, guid: 8b231e18a21ce764a95aea2e2199a8c9,
         type: 3}
     - target: {fileID: 1875099256750070797, guid: a2bc03b511aa9c048aab935e7a5c7de7,
         type: 3}
       propertyPath: deathChunkParticle
       value: 
-      objectReference: {fileID: 1962614393226834858, guid: 4639ada2f2f76c6438d3c81250afa062,
+      objectReference: {fileID: 1962614393226834858, guid: a66c31b2b38380140a2b685105af7215,
         type: 3}
     - target: {fileID: 1875099256750070800, guid: a2bc03b511aa9c048aab935e7a5c7de7,
         type: 3}
@@ -151,6 +156,11 @@ PrefabInstance:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1875099256750070802, guid: a2bc03b511aa9c048aab935e7a5c7de7,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1875099256750070806, guid: a2bc03b511aa9c048aab935e7a5c7de7,
         type: 3}
       propertyPath: m_RootOrder
@@ -159,12 +169,12 @@ PrefabInstance:
     - target: {fileID: 1875099256750070806, guid: a2bc03b511aa9c048aab935e7a5c7de7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.1
+      value: 98.66955
       objectReference: {fileID: 0}
     - target: {fileID: 1875099256750070806, guid: a2bc03b511aa9c048aab935e7a5c7de7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.82
+      value: -15.724206
       objectReference: {fileID: 0}
     - target: {fileID: 1875099256750070806, guid: a2bc03b511aa9c048aab935e7a5c7de7,
         type: 3}
@@ -209,7 +219,7 @@ PrefabInstance:
     - target: {fileID: 1875099256750070807, guid: a2bc03b511aa9c048aab935e7a5c7de7,
         type: 3}
       propertyPath: m_Name
-      value: Skeleton with HealthBar
+      value: Skeleton with HealthBarLV2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2bc03b511aa9c048aab935e7a5c7de7, type: 3}
@@ -339,7 +349,7 @@ PrefabInstance:
     - target: {fileID: 3309712446005102444, guid: f4ddfe1b03559214ba61f4c522a11b50,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3309712446491849986, guid: f4ddfe1b03559214ba61f4c522a11b50,
         type: 3}
@@ -359,7 +369,7 @@ PrefabInstance:
     - target: {fileID: 3309712446491849987, guid: f4ddfe1b03559214ba61f4c522a11b50,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 7
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 3309712446491849988, guid: f4ddfe1b03559214ba61f4c522a11b50,
         type: 3}

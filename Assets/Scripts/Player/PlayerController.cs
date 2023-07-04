@@ -48,7 +48,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float damageFall;
     [SerializeField] private LayerMask jumpGround;
     [SerializeField] private Vector2 hitSpeed;
-    [SerializeField] private AudioSource SLidingsound;
+    [SerializeField] private AudioSource slidingSound;
+    [SerializeField] private AudioSource walkingSound;
+
 
     [SerializeField] private ParticleSystem runDust;
     [SerializeField] private ParticleSystem slideDust;
@@ -89,7 +91,7 @@ public class PlayerController : MonoBehaviour
             maxHealth = GameManager.Instance.maxHP;
             currentHealth = GameManager.Instance.HpPlayer;
         }
-        SLidingsound = GetComponent<AudioSource>();
+        //slidingSound = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -101,6 +103,8 @@ public class PlayerController : MonoBehaviour
         }
         counter += Time.deltaTime;
         dicX = Input.GetAxis("Horizontal");
+        
+        
         Jump();
         UpdateState();
         Dashing();
@@ -108,6 +112,7 @@ public class PlayerController : MonoBehaviour
         // Debug.Log(rb.velocity.y);
         TakeDamgefall();
         Debug.Log(isGround());
+       
     }
     private void FixedUpdate()
     {
@@ -119,7 +124,14 @@ public class PlayerController : MonoBehaviour
         }
         CheckWallSliding();
         SlideWall();
-
+        if (dicX != 0 && !walkingSound.isPlaying)
+        {
+            walkingSound.Play();
+        }
+        if (dicX == 0 || !isGround()  || rb.velocity.x == 0)
+        {
+            walkingSound.Stop();
+        }
     }
     private void Jump()
     {
@@ -152,10 +164,12 @@ public class PlayerController : MonoBehaviour
         if (dicX > 0)
         {
             transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
+            
         }
         if (dicX < 0)
         {
             transform.localScale = new Vector3((-1) * scaleX, transform.localScale.y, transform.localScale.z);
+
         }
     }
 
@@ -190,15 +204,15 @@ public class PlayerController : MonoBehaviour
         {
             isSliding = true;           
             rb.velocity = new Vector2(rb.velocity.x, -GravityWall);
-            if(!SLidingsound.isPlaying)
+            if(!slidingSound.isPlaying)
             {
-                SLidingsound.Play();
+                slidingSound.Play();
             }
         }
         if (isGround() || !isWall())
         {
             isSliding = false;
-            SLidingsound.Stop();
+            slidingSound.Stop();
         }
         
     }
@@ -362,19 +376,21 @@ public class PlayerController : MonoBehaviour
         CharacterEvents.characterDamaged.Invoke(this.gameObject, attackEnemyDetails);
         if (currentHealth <= 0f)
         {
+            isDead = true;
             Dead();
         }
     }
 
     private void Dead()
     {
+        walkingSound.Stop();
         animator.SetBool("death", true);
         isDead = true;
-            if (GameManager.HasInstance && GameManager.Instance.IsPlaying)
-            {
-                GameManager.Instance.PauseGame();
-                UIManager.Instance.ActiveLosePanel(true);
-            }
+        //if (UIManager.HasInstance)
+        //{
+        //    Time.timeScale = 0f;
+        //    UIManager.Instance.ActiveLosePanel(true);
+        //}
         //animator.SetBool("hit", false);
         //boxcol.size = new Vector2(2, 1.4f);
         //boxcol.size = new Vector2(2.1f, 1.5f);

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class UIManager : BaseManager<UIManager>
 {
@@ -45,15 +47,18 @@ public class UIManager : BaseManager<UIManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if(GameManager.HasInstance && GameManager.Instance.IsPlaying)
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    if(GameManager.HasInstance && GameManager.Instance.IsPlaying)
+        //    {
+        //        GameManager.Instance.PauseGame();
+        //        ActivePausePanel(true);
+        //    }
+        //}
+        if (GameManager.HasInstance && GameManager.Instance.HpPlayer <= 0)
             {
-                GameManager.Instance.PauseGame();
-                ActivePausePanel(true);
+            ActiveLosePanel(true);
             }
-        }
-     
     }
 
     public void ActiveMenuPanel(bool active)

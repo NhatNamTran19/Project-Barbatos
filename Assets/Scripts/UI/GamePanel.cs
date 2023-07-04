@@ -30,4 +30,8 @@ public class GamePanel : MonoBehaviour
     {
         soulText.text = value.ToString();
     }
+    private void Update()
+    {
+        
+    }
 }

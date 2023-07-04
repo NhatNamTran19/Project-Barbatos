@@ -11,7 +11,7 @@ public class GameManager : BaseManager<GameManager>
     private int soul = 0;
     public int Soul => soul;
 
-    public float maxHP = 500;
+    public float maxHP = 50;
     private float hpPlayer;
     public float HpPlayer => hpPlayer;
 
@@ -63,14 +63,19 @@ public class GameManager : BaseManager<GameManager>
 
     public void RestartGame()
     {
-        ChangeScene("Menu");
-        SceneManager.LoadScene("StartScene");
+        ChangeScene("StartScene");
+        hpPlayer = maxHP;
+        //SceneManager.LoadScene("StartScene");
         if (UIManager.HasInstance)
         {
             UIManager.Instance.ActiveMenuPanel(true);
             UIManager.Instance.ActiveGamePanel(false);
             UIManager.Instance.ActiveVictoryPanel(false);
             UIManager.Instance.ActiveLosePanel(false);
+        }
+        if (AudioManager.HasInstance && UIManager.HasInstance)
+        {
+            AudioManager.Instance.PlayBGM(AUDIO.BGM_BGM_01);
         }
     }
 
